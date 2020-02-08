@@ -1,7 +1,135 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3fc-eO-AU9">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Account-->
+        <scene sceneID="3RP-cT-afM">
+            <objects>
+                <viewController title="Account" id="fKO-PN-cZV" customClass="AccountViewController" customModule="EthereumSigner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eY9-38-sPg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="44" translatesAutoresizingMaskIntoConstraints="NO" id="A4a-GD-g1v">
+                                <rect key="frame" x="16" y="742" width="382" height="104"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1eQ-Dj-BmC">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="30"/>
+                                        <state key="normal" title="Sign"/>
+                                        <connections>
+                                            <segue destination="vKb-Lc-PwG" kind="show" identifier="showSigning" id="1qz-6L-Ejl"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fvY-TP-U4q">
+                                        <rect key="frame" x="0.0" y="74" width="382" height="30"/>
+                                        <state key="normal" title="Verify"/>
+                                        <connections>
+                                            <segue destination="0UA-cW-oGB" kind="show" identifier="showVerification" id="s1A-se-fBi"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="MaT-QU-anQ">
+                                <rect key="frame" x="16" y="156" width="382" height="188"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZwD-eR-9F8">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="106.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDg-CY-rEF">
+                                                <rect key="frame" x="326" y="0.0" width="56" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0x9CDCC93812398129874892174987214897129874821794827189742198472198c748921x79872198c7n2198749821798721498c7918247c9812n7c4" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZE1-Sd-iBh">
+                                                <rect key="frame" x="0.5" y="25" width="381.5" height="81.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="H0I-ZT-3wT">
+                                        <rect key="frame" x="0.0" y="138.5" width="382" height="49.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXz-8z-ocq">
+                                                <rect key="frame" x="328.5" y="0.0" width="53.5" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.5602983369 Ether" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRn-Z7-9Sv">
+                                                <rect key="frame" x="214.5" y="29" width="167.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="MaT-QU-anQ" firstAttribute="top" secondItem="aCO-eR-feE" secondAttribute="top" constant="16" id="7ne-uu-2cu"/>
+                            <constraint firstItem="aCO-eR-feE" firstAttribute="trailing" secondItem="A4a-GD-g1v" secondAttribute="trailing" constant="16" id="BXM-Kq-0rN"/>
+                            <constraint firstItem="aCO-eR-feE" firstAttribute="bottom" secondItem="A4a-GD-g1v" secondAttribute="bottom" constant="16" id="DFP-MN-ew5"/>
+                            <constraint firstItem="MaT-QU-anQ" firstAttribute="leading" secondItem="aCO-eR-feE" secondAttribute="leading" constant="16" id="GsP-LX-csg"/>
+                            <constraint firstItem="aCO-eR-feE" firstAttribute="trailing" secondItem="MaT-QU-anQ" secondAttribute="trailing" constant="16" id="N3E-1r-IKd"/>
+                            <constraint firstItem="A4a-GD-g1v" firstAttribute="leading" secondItem="aCO-eR-feE" secondAttribute="leading" constant="16" id="O6j-hD-MKq"/>
+                            <constraint firstItem="A4a-GD-g1v" firstAttribute="top" relation="greaterThanOrEqual" secondItem="MaT-QU-anQ" secondAttribute="bottom" constant="16" id="cHv-K7-qJ4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aCO-eR-feE"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Account" largeTitleDisplayMode="always" id="1RB-dY-Q0R"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ts6-fa-jMt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="900.00000000000011" y="120.53571428571428"/>
+        </scene>
+        <!--Signing-->
+        <scene sceneID="s3U-Pt-lgN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Signing" id="vKb-Lc-PwG" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ZSF-8o-P7N"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R3o-p7-zpi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="718" y="538"/>
+        </scene>
+        <!--Verification-->
+        <scene sceneID="iJ9-yv-ibF">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Verification" id="0UA-cW-oGB" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="7o6-bu-Znb"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vnw-jy-vwd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1082" y="537"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="pOU-w4-T2B">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3fc-eO-AU9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="dlu-V9-wsl">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fKO-PN-cZV" kind="relationship" relationship="rootViewController" id="1xf-wO-b06"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KuQ-EC-koT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-10.144927536231885" y="120.53571428571428"/>
+        </scene>
+    </scenes>
 </document>
