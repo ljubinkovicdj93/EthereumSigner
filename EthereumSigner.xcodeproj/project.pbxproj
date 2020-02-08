@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9F1E818F23EED47900F0969D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1E818E23EED47900F0969D /* AppDelegate.swift */; };
-		9F1E819123EED47900F0969D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1E819023EED47900F0969D /* SceneDelegate.swift */; };
 		9F1E819323EED47900F0969D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1E819223EED47900F0969D /* ViewController.swift */; };
 		9F1E819623EED47900F0969D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F1E819423EED47900F0969D /* Main.storyboard */; };
 		9F1E819823EED47A00F0969D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F1E819723EED47A00F0969D /* Assets.xcassets */; };
@@ -18,7 +17,6 @@
 /* Begin PBXFileReference section */
 		9F1E818B23EED47900F0969D /* EthereumSigner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EthereumSigner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F1E818E23EED47900F0969D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9F1E819023EED47900F0969D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9F1E819223EED47900F0969D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9F1E819523EED47900F0969D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9F1E819723EED47A00F0969D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,7 +55,6 @@
 			isa = PBXGroup;
 			children = (
 				9F1E818E23EED47900F0969D /* AppDelegate.swift */,
-				9F1E819023EED47900F0969D /* SceneDelegate.swift */,
 				9F1E819223EED47900F0969D /* ViewController.swift */,
 				9F1E819423EED47900F0969D /* Main.storyboard */,
 				9F1E819723EED47A00F0969D /* Assets.xcassets */,
@@ -140,7 +137,6 @@
 			files = (
 				9F1E819323EED47900F0969D /* ViewController.swift in Sources */,
 				9F1E818F23EED47900F0969D /* AppDelegate.swift in Sources */,
-				9F1E819123EED47900F0969D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +283,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 847623UFJR;
 				INFOPLIST_FILE = EthereumSigner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -305,6 +302,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 847623UFJR;
 				INFOPLIST_FILE = EthereumSigner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
