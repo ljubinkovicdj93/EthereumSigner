@@ -24,6 +24,16 @@ protocol SetupDataStore {
 }
 
 class SetupInteractor: SetupBusinessLogic, SetupDataStore {
+
+    private struct Constants {
+        static let HexCode = "0x"
+        static let MaximumCharactersAllowed: Int = 64
+        static let AllZeroCharacters: String = Array(repeating: "0", count: Constants.MaximumCharactersAllowed).joined(separator: .empty)
+        
+        struct Error {
+            static let Message: String = "Invalid private key. Enter at least 64 alphanumeric letters, or 66 if the first two are `0x`"
+        }
+    }
     
     var wallet: Wallet?
     
@@ -31,22 +41,32 @@ class SetupInteractor: SetupBusinessLogic, SetupDataStore {
     lazy var worker: SetupWorker? = {
         return SetupWorker()
     }()
-    //var name: String = ""
     
     // MARK: Business Logic
     
     func requestInitialState() {
-        let onTextDidChangeClosure: (String) -> Void = { text in
-            print(text)
+        let onTextDidChangeClosure: (String) -> Void = { [weak self] text in guard let self = self else { return }
+            let isHexEntered = text.hasPrefix(Constants.HexCode)
+            let maxCharactersAllowed = isHexEntered ? Constants.MaximumCharactersAllowed + 2 : Constants.MaximumCharactersAllowed
+            let allZeros = isHexEntered ? "\(Constants.HexCode)\(Constants.AllZeroCharacters)" : Constants.AllZeroCharacters
+            
+            let validationState: ValidationState
+            if text.count == maxCharactersAllowed && text.isAlphanumeric && text != allZeros {
+                validationState = .valid
+            } else if text.isEmpty {
+                validationState = .none
+            } else {
+                validationState = .invalid(Constants.Error.Message)
+            }
+            
+            self.presenter?.presentValidationDidChange(Setup.ValidationChange.Response(validationState: validationState, maximumCharactersAllowed: .limited(maxCharactersAllowed)))
         }
-        presenter?.presentInitialState(Setup.InitialState.Response(onTextDidChangeClosure: onTextDidChangeClosure))
+        presenter?.presentInitialState(Setup.InitialState.Response(maximumCharactersAllowed: .limited(Constants.MaximumCharactersAllowed), onTextDidChangeClosure: onTextDidChangeClosure))
     }
     
     func createAccount(_ request: Setup.Account.Request) throws {
-        #warning("TODO: USE THIS INSTEAD!")
-//        let privateKey = request.privateKeyText
-        let privateKey = "A6E4AF5B2B8323E965876D94D9CE635723A8A7193E61000D241CDDEAA613F3E4" // Some private key
-        Web3Manager.shared.storePrivateKey(privateKey)
+//        let privateKey = "A6E4AF5B2B8323E965876D94D9CE635723A8A7193E61000D241CDDEAA613F3E4" // Some private key
+        Web3Manager.shared.storePrivateKey(request.privateKeyText)
         
         do {
             let wallet = try Web3Manager.shared.getAccountAndBalance()

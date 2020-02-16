@@ -17,11 +17,15 @@ struct Setup {
     
     struct InitialState {
         struct Response {
-            var onTextDidChangeClosure: (String) -> Void
+            let maximumCharactersAllowed: MaximumCharactersAllowed
+            let onTextDidChangeClosure: (String) -> Void
+            let validationState: ValidationState = .none
         }
         
         struct ViewModel {
             var validationConfiguration: ValidationConfiguration
+            let errorLabelStyle: UIViewStyle<UILabel>
+            let buttonStyle: UIViewStyle<UIButton>
         }
     }
     
@@ -37,6 +41,20 @@ struct Setup {
         struct ViewModel {
             let accountAddress: String
             let walletBalance: String
+        }
+    }
+    
+    struct ValidationChange {
+        struct Response {
+            let validationState: ValidationState
+            let maximumCharactersAllowed: MaximumCharactersAllowed
+        }
+        
+        struct ViewModel {
+            let errorLabelStyle: UIViewStyle<UILabel>
+            let buttonStyle: UIViewStyle<UIButton>
+            let validationState: ValidationState
+            let maximumCharactersAllowed: MaximumCharactersAllowed
         }
     }
 }

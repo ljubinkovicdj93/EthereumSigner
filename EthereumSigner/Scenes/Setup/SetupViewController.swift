@@ -14,6 +14,7 @@ import UIKit
 
 protocol SetupDisplayLogic: class {
     func displayInitialState(_ viewModel: Setup.InitialState.ViewModel)
+    func displayValidationDidChange(_ viewModel: Setup.ValidationChange.ViewModel)
     func displayAccountAndBalance(_ viewModel: Setup.Account.ViewModel)
 }
 
@@ -27,6 +28,8 @@ class SetupViewController: UIViewController {
     // MARK: - Outlets
     
     @IBOutlet weak var privateKeyTextField: UITextField!
+    @IBOutlet weak var errorMessageLabel: UILabel!
+    @IBOutlet weak var nextButton: UIButton!
     
     // MARK: - Object Lifecycle
     
@@ -42,13 +45,31 @@ class SetupViewController: UIViewController {
         
         interactor?.requestInitialState()
         
-        do {
-            try interactor?.createAccount(Setup.Account.Request(privateKeyText: "djoko"))
-        } catch {
-            print(error.localizedDescription)
-        }
+        
+        
+//        do {
+//            try interactor?.createAccount(Setup.Account.Request(privateKeyText: "djoko"))
+//        } catch {
+//            print(error.localizedDescription)
+//        }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        handleKeyboard()
+        hideKeyboardWhenTappedAround()
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func onNextButtonTapped(_ sender: UIButton) {
+        guard let validationConfiguration = self.validationConfiguration else { return }
+        do {
+            try interactor?.createAccount(Setup.Account.Request(privateKeyText: validationConfiguration.currentText))
+        } catch {
+            print("Something went wrong: \(error.localizedDescription)")
+        }
+    }
 }
 
 // MARK: - Display Logic
@@ -57,6 +78,17 @@ extension SetupViewController: SetupDisplayLogic {
     func displayInitialState(_ viewModel: Setup.InitialState.ViewModel) {
         validationConfiguration = viewModel.validationConfiguration
         validationConfiguration?.setup(privateKeyTextField)
+        
+        viewModel.buttonStyle.apply(to: nextButton)
+        viewModel.errorLabelStyle.apply(to: errorMessageLabel)
+    }
+    
+    func displayValidationDidChange(_ viewModel: Setup.ValidationChange.ViewModel) {
+        viewModel.buttonStyle.apply(to: nextButton)
+        viewModel.errorLabelStyle.apply(to: errorMessageLabel)
+        validationConfiguration?.updateMaximumCharactersLimit(viewModel.maximumCharactersAllowed)
+        
+        if viewModel.validationState == .valid { privateKeyTextField.resignFirstResponder() }
     }
     
     func displayAccountAndBalance(_ viewModel: Setup.Account.ViewModel) {

@@ -20,20 +20,47 @@
                                 <rect key="frame" x="16" y="484" width="382" height="34"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TU4-uc-VbL">
+                                <rect key="frame" x="16" y="526" width="382" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avB-qT-wU9">
+                                <rect key="frame" x="32" y="796" width="350" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="5Wu-Ee-NyX"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onNextButtonTapped:" destination="owv-4A-5QZ" eventType="touchUpInside" id="gnO-Kz-SgZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="JLo-aJ-18t" firstAttribute="trailing" secondItem="mwQ-PI-xUR" secondAttribute="trailing" constant="16" id="3qp-iI-whB"/>
+                            <constraint firstItem="avB-qT-wU9" firstAttribute="leading" secondItem="JLo-aJ-18t" secondAttribute="leading" constant="32" id="4Ss-Do-26r"/>
+                            <constraint firstItem="JLo-aJ-18t" firstAttribute="bottom" secondItem="avB-qT-wU9" secondAttribute="bottom" constant="16" id="50M-xu-WXe"/>
                             <constraint firstItem="mwQ-PI-xUR" firstAttribute="centerY" secondItem="JLo-aJ-18t" secondAttribute="centerY" id="8cQ-DE-Isd"/>
+                            <constraint firstItem="TU4-uc-VbL" firstAttribute="top" secondItem="mwQ-PI-xUR" secondAttribute="bottom" constant="8" id="F9t-YL-dt0"/>
+                            <constraint firstItem="TU4-uc-VbL" firstAttribute="leading" secondItem="mwQ-PI-xUR" secondAttribute="leading" id="FVp-7t-iNj"/>
+                            <constraint firstItem="TU4-uc-VbL" firstAttribute="trailing" secondItem="mwQ-PI-xUR" secondAttribute="trailing" id="N1J-rm-j3N"/>
                             <constraint firstItem="mwQ-PI-xUR" firstAttribute="centerX" secondItem="JLo-aJ-18t" secondAttribute="centerX" id="PZU-Da-Rcs"/>
                             <constraint firstItem="mwQ-PI-xUR" firstAttribute="leading" secondItem="JLo-aJ-18t" secondAttribute="leading" constant="16" id="rlT-yI-JPC"/>
+                            <constraint firstItem="JLo-aJ-18t" firstAttribute="trailing" secondItem="avB-qT-wU9" secondAttribute="trailing" constant="32" id="s3C-W7-Rhe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JLo-aJ-18t"/>
                     </view>
                     <navigationItem key="navigationItem" title="Setup" largeTitleDisplayMode="always" id="V28-zG-Qp4"/>
                     <connections>
+                        <outlet property="errorMessageLabel" destination="TU4-uc-VbL" id="oP0-hW-yPp"/>
+                        <outlet property="nextButton" destination="avB-qT-wU9" id="fl6-Ov-tQM"/>
                         <outlet property="privateKeyTextField" destination="mwQ-PI-xUR" id="BfY-Ej-BTe"/>
                         <segue destination="xZm-og-YUk" kind="show" identifier="showAccountAndBalance" id="Twh-Xc-ilh"/>
                     </connections>

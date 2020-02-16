@@ -32,11 +32,11 @@ protocol ValidatableTextField: TextFieldable {
 }
 
 class ValidationConfiguration: NSObject, ValidatableTextField {
-
+    
     var textField: UITextField!
     var maximumCharactersAllowed: MaximumCharactersAllowed!
     var onTextDidChange: ((String) -> Void)?
-
+    
     var currentText: String {
         get { return textField.text ?? . empty }
         set { textField.text = newValue }
@@ -53,12 +53,17 @@ class ValidationConfiguration: NSObject, ValidatableTextField {
         self.textField.delegate = self
     }
     
+    func updateMaximumCharactersLimit(_ maximumCharactersAllowed: MaximumCharactersAllowed) {
+        self.maximumCharactersAllowed = maximumCharactersAllowed
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-         guard case .limited(let limit) = maximumCharactersAllowed else {
-             return true
-         }
-         if string == .empty { return true } // return true if user is deleting characters
-         return currentText.count < limit
+        guard case .limited(let limit) = maximumCharactersAllowed else {
+            return true
+        }
+        if string == .empty { return true } // return true if user is deleting characters
+        if string == .whitespace { return false }
+        return currentText.count < limit
     }
     
     @objc private func textUpdated() {

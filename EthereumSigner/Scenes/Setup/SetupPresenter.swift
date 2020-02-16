@@ -15,12 +15,46 @@ import UIKit
 protocol SetupPresentationLogic {
     func presentInitialState(_ response: Setup.InitialState.Response)
     func presentAccountAndBalance(_ response: Setup.Account.Response)
+    func presentValidationDidChange(_ response: Setup.ValidationChange.Response)
 }
 
 class SetupPresenter: SetupPresentationLogic {
     
     private struct Constants {
-        static let MaximumCharactersAllowed: Int = 64
+        static let ButtonTitle: String = "Next"
+    }
+    
+    private lazy var errorLabelStyleHandler: (ValidationState) -> UIViewStyle<UILabel> = { validationState in
+        return UIViewStyle<UILabel> { label in
+            var isHidden: Bool = false
+            
+            switch validationState {
+            case let .invalid(errorMessage):
+                label.text = errorMessage
+            default:
+                isHidden = true
+                label.text = .empty
+            }
+            label.isHidden = isHidden
+        }
+    }
+
+    private lazy var buttonStyleHandler: (ValidationState) -> UIViewStyle<UIButton> = { validationState in
+        return UIViewStyle<UIButton> { button in
+            var isEnabled: Bool = false
+            
+            switch validationState {
+            case .none, .invalid:
+                button.backgroundColor = .lightGray
+            case .valid:
+                isEnabled = true
+                button.backgroundColor = .systemBlue
+            }
+            
+            button.setTitleColor(.white, for: .normal)
+            button.setTitle(Constants.ButtonTitle, for: .normal)
+            button.isEnabled = isEnabled
+        }
     }
     
     weak var viewController: SetupDisplayLogic?
@@ -28,12 +62,22 @@ class SetupPresenter: SetupPresentationLogic {
     // MARK: Presentation Logic
     
     func presentInitialState(_ response: Setup.InitialState.Response) {
-        let validationConfiguration = ValidationConfiguration(maximumCharactersAllowed: .limited(Constants.MaximumCharactersAllowed),
+        let validationConfiguration = ValidationConfiguration(maximumCharactersAllowed: response.maximumCharactersAllowed,
                                                               onTextDidChangeCompletion: response.onTextDidChangeClosure)
-        let viewModel = Setup.InitialState.ViewModel(validationConfiguration: validationConfiguration)
+        let viewModel = Setup.InitialState.ViewModel(validationConfiguration: validationConfiguration,
+                                                     errorLabelStyle: errorLabelStyleHandler(response.validationState),
+                                                     buttonStyle: buttonStyleHandler(response.validationState))
         viewController?.displayInitialState(viewModel)
     }
     
+    func presentValidationDidChange(_ response: Setup.ValidationChange.Response) {
+        let viewModel = Setup.ValidationChange.ViewModel(errorLabelStyle: errorLabelStyleHandler(response.validationState),
+                                                         buttonStyle: buttonStyleHandler(response.validationState),
+                                                         validationState: response.validationState,
+                                                         maximumCharactersAllowed: response.maximumCharactersAllowed)
+        viewController?.displayValidationDidChange(viewModel)
+    }
+
     func presentAccountAndBalance(_ response: Setup.Account.Response) {
         let wallet = response.wallet
         let viewModel = Setup.Account.ViewModel(accountAddress: wallet.accountAddress, walletBalance: wallet.balance)

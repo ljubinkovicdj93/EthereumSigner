@@ -18,6 +18,8 @@
 		9F8ADFD823F94F830075FBA3 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8ADFD723F94F830075FBA3 /* StringExtensions.swift */; };
 		9F8ADFDB23F95BF00075FBA3 /* ValidatableTextFieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8ADFDA23F95BF00075FBA3 /* ValidatableTextFieldConfiguration.swift */; };
 		9F8ADFDE23F97FAA0075FBA3 /* Web3Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8ADFDD23F97FAA0075FBA3 /* Web3Manager.swift */; };
+		9F8ADFE123F992AF0075FBA3 /* UIViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8ADFE023F992AF0075FBA3 /* UIViewStyle.swift */; };
+		9F8ADFE323F996980075FBA3 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8ADFE223F996980075FBA3 /* UIViewControllerExtensions.swift */; };
 		9FAE315D23EEE68A004F3D72 /* SetupPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE315623EEE68A004F3D72 /* SetupPresenter.swift */; };
 		9FAE315E23EEE68A004F3D72 /* SetupWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE315723EEE68A004F3D72 /* SetupWorker.swift */; };
 		9FAE315F23EEE68A004F3D72 /* SetupRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE315823EEE68A004F3D72 /* SetupRouter.swift */; };
@@ -80,6 +82,8 @@
 		9F8ADFD723F94F830075FBA3 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		9F8ADFDA23F95BF00075FBA3 /* ValidatableTextFieldConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatableTextFieldConfiguration.swift; sourceTree = "<group>"; };
 		9F8ADFDD23F97FAA0075FBA3 /* Web3Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3Manager.swift; sourceTree = "<group>"; };
+		9F8ADFE023F992AF0075FBA3 /* UIViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewStyle.swift; sourceTree = "<group>"; };
+		9F8ADFE223F996980075FBA3 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		9FAE315623EEE68A004F3D72 /* SetupPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupPresenter.swift; sourceTree = "<group>"; };
 		9FAE315723EEE68A004F3D72 /* SetupWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWorker.swift; sourceTree = "<group>"; };
 		9FAE315823EEE68A004F3D72 /* SetupRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupRouter.swift; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 		9F1E818D23EED47900F0969D /* EthereumSigner */ = {
 			isa = PBXGroup;
 			children = (
+				9F8ADFDF23F992A70075FBA3 /* Utils */,
 				9F8ADFDC23F97F9E0075FBA3 /* Web3Manager */,
 				9F8ADFD923F95BE90075FBA3 /* ValidatableTextField */,
 				9F8ADFD623F94F760075FBA3 /* Extensions */,
@@ -191,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				9F8ADFD723F94F830075FBA3 /* StringExtensions.swift */,
+				9F8ADFE223F996980075FBA3 /* UIViewControllerExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -209,6 +215,14 @@
 				9F8ADFDD23F97FAA0075FBA3 /* Web3Manager.swift */,
 			);
 			path = Web3Manager;
+			sourceTree = "<group>";
+		};
+		9F8ADFDF23F992A70075FBA3 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9F8ADFE023F992AF0075FBA3 /* UIViewStyle.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		9FAE314123EEE5ED004F3D72 /* Scenes */ = {
@@ -444,6 +458,8 @@
 				9FAE317D23EEE6A2004F3D72 /* SigningViewController.swift in Sources */,
 				9FAE317923EEE6A2004F3D72 /* SigningPresenter.swift in Sources */,
 				9FAE317C23EEE6A2004F3D72 /* SigningModels.swift in Sources */,
+				9F8ADFE323F996980075FBA3 /* UIViewControllerExtensions.swift in Sources */,
+				9F8ADFE123F992AF0075FBA3 /* UIViewStyle.swift in Sources */,
 				9FAE316D23EEE695004F3D72 /* AccountRouter.swift in Sources */,
 				9FAE316C23EEE695004F3D72 /* AccountWorker.swift in Sources */,
 				9FAE318A23EEE6AE004F3D72 /* SignatureModels.swift in Sources */,
