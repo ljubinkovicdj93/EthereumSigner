@@ -57,9 +57,13 @@
 		9FAE31A723EEE6C6004F3D72 /* QRCodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE31A023EEE6C6004F3D72 /* QRCodeScannerViewController.swift */; };
 		9FAE31A823EEE6C6004F3D72 /* QRCodeScannerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE31A123EEE6C6004F3D72 /* QRCodeScannerInteractor.swift */; };
 		9FAE31A923EEE6C6004F3D72 /* QRCodeScannerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE31A223EEE6C6004F3D72 /* QRCodeScannerConfigurator.swift */; };
+		B5AC818B455FF822685B9F26 /* Pods_EthereumSigner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B43D56C98C94E296D8568B5 /* Pods_EthereumSigner.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B43D56C98C94E296D8568B5 /* Pods_EthereumSigner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EthereumSigner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		494667A796BED8369D5544C7 /* Pods-EthereumSigner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EthereumSigner.debug.xcconfig"; path = "Target Support Files/Pods-EthereumSigner/Pods-EthereumSigner.debug.xcconfig"; sourceTree = "<group>"; };
+		8BF10A22CF6AA96B843E6783 /* Pods-EthereumSigner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EthereumSigner.release.xcconfig"; path = "Target Support Files/Pods-EthereumSigner/Pods-EthereumSigner.release.xcconfig"; sourceTree = "<group>"; };
 		9F1E818B23EED47900F0969D /* EthereumSigner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EthereumSigner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F1E818E23EED47900F0969D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F1E819223EED47900F0969D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -119,17 +123,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5AC818B455FF822685B9F26 /* Pods_EthereumSigner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4CEC8635C5E8F980744B4587 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				494667A796BED8369D5544C7 /* Pods-EthereumSigner.debug.xcconfig */,
+				8BF10A22CF6AA96B843E6783 /* Pods-EthereumSigner.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		87568B3FBF9687A293C1A4EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2B43D56C98C94E296D8568B5 /* Pods_EthereumSigner.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9F1E818223EED47900F0969D = {
 			isa = PBXGroup;
 			children = (
 				9F1E818D23EED47900F0969D /* EthereumSigner */,
 				9F1E818C23EED47900F0969D /* Products */,
+				4CEC8635C5E8F980744B4587 /* Pods */,
+				87568B3FBF9687A293C1A4EF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -270,9 +295,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9F1E819F23EED47A00F0969D /* Build configuration list for PBXNativeTarget "EthereumSigner" */;
 			buildPhases = (
+				B99D4ABC11C6FAB61DC672D3 /* [CP] Check Pods Manifest.lock */,
 				9F1E818723EED47900F0969D /* Sources */,
 				9F1E818823EED47900F0969D /* Frameworks */,
 				9F1E818923EED47900F0969D /* Resources */,
+				739D7E7272F48080FE5C7E77 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -331,6 +358,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		739D7E7272F48080FE5C7E77 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EthereumSigner/Pods-EthereumSigner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EthereumSigner/Pods-EthereumSigner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EthereumSigner/Pods-EthereumSigner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B99D4ABC11C6FAB61DC672D3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EthereumSigner-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9F1E818723EED47900F0969D /* Sources */ = {
@@ -514,6 +583,7 @@
 		};
 		9F1E81A023EED47A00F0969D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 494667A796BED8369D5544C7 /* Pods-EthereumSigner.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -533,6 +603,7 @@
 		};
 		9F1E81A123EED47A00F0969D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8BF10A22CF6AA96B843E6783 /* Pods-EthereumSigner.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
