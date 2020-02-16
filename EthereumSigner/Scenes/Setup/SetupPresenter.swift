@@ -13,17 +13,30 @@
 import UIKit
 
 protocol SetupPresentationLogic {
-    func presentSomething(_ response: Setup.Something.Response)
+    func presentInitialState(_ response: Setup.InitialState.Response)
+    func presentAccountAndBalance(_ response: Setup.Account.Response)
 }
 
 class SetupPresenter: SetupPresentationLogic {
     
+    private struct Constants {
+        static let MaximumCharactersAllowed: Int = 64
+    }
+    
     weak var viewController: SetupDisplayLogic?
     
-    // MARK: Do something
+    // MARK: Presentation Logic
     
-    func presentSomething(_ response: Setup.Something.Response) {
-        let viewModel = Setup.Something.ViewModel()
-        viewController?.displaySomething(viewModel)
+    func presentInitialState(_ response: Setup.InitialState.Response) {
+        let validationConfiguration = ValidationConfiguration(maximumCharactersAllowed: .limited(Constants.MaximumCharactersAllowed),
+                                                              onTextDidChangeCompletion: response.onTextDidChangeClosure)
+        let viewModel = Setup.InitialState.ViewModel(validationConfiguration: validationConfiguration)
+        viewController?.displayInitialState(viewModel)
+    }
+    
+    func presentAccountAndBalance(_ response: Setup.Account.Response) {
+        let wallet = response.wallet
+        let viewModel = Setup.Account.ViewModel(accountAddress: wallet.accountAddress, walletBalance: wallet.balance)
+        viewController?.displayAccountAndBalance(viewModel)
     }
 }

@@ -13,7 +13,7 @@
 import UIKit
 
 protocol SetupRoutingNavigation {
-    func showNewScreen()
+    func showAccountAndBalance()
 }
 
 protocol SetupDataPassing {
@@ -26,7 +26,7 @@ typealias SetupRouterInput = SetupRoutingNavigation & SetupDataPassing
 class SetupRouter: SetupRouterInput {
     
     private struct Segues {
-        static let ShowNextScreenIdentifier = ""
+        static let ShowAccountAndBalanceIdentifier = "showAccountAndBalance"
     }
     
     var dataStore: SetupDataStore?
@@ -34,15 +34,18 @@ class SetupRouter: SetupRouterInput {
     
     // MARK: Navigation
     
-    func showNewScreen() {
-        viewController?.performSegue(withIdentifier: Segues.ShowNextScreenIdentifier, sender: nil)
+    func showAccountAndBalance() {
+        viewController?.performSegue(withIdentifier: Segues.ShowAccountAndBalanceIdentifier, sender: nil)
     }
     
     // MARK: Passing data
     
     func passDataToNextScene(segue: UIStoryboardSegue) {
-        if segue.identifier == Segues.ShowNextScreenIdentifier {
-            // Pass Relevant Data
+        if segue.identifier == Segues.ShowAccountAndBalanceIdentifier,
+            let navigationController = segue.destination as? UINavigationController,
+            let accountViewController = navigationController.children.first as? AccountViewController {
+            
+            accountViewController.router?.dataStore?.wallet = dataStore?.wallet
         }
     }
 }

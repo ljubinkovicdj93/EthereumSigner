@@ -15,12 +15,15 @@ import UIKit
 struct Account {
     // MARK: Use cases
     
-    struct Something {
-        struct Request {
-        }
+    struct UpdateViews {
+
         struct Response {
+            let wallet: Wallet
         }
+        
         struct ViewModel {
+            let accountAddress: String
+            let balance: String
         }
     }
 }

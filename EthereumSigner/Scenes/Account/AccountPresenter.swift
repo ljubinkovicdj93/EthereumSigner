@@ -13,7 +13,7 @@
 import UIKit
 
 protocol AccountPresentationLogic {
-    func presentSomething(_ response: Account.Something.Response)
+    func presentAccountAndBalance(_ response: Account.UpdateViews.Response)
 }
 
 class AccountPresenter: AccountPresentationLogic {
@@ -22,8 +22,9 @@ class AccountPresenter: AccountPresentationLogic {
     
     // MARK: Do something
     
-    func presentSomething(_ response: Account.Something.Response) {
-        let viewModel = Account.Something.ViewModel()
-        viewController?.displaySomething(viewModel)
+    func presentAccountAndBalance(_ response: Account.UpdateViews.Response) {
+        let viewModel = Account.UpdateViews.ViewModel(accountAddress: response.wallet.accountAddress,
+                                                      balance: response.wallet.balance)
+        viewController?.displayUpdatedViews(viewModel)
     }
 }

@@ -13,16 +13,18 @@
 import UIKit
 
 protocol AccountDisplayLogic: class {
-    func displaySomething(_ viewModel: Account.Something.ViewModel)
+    func displayUpdatedViews(_ viewModel: Account.UpdateViews.ViewModel)
 }
 
-class AccountViewController: UIViewController, AccountDisplayLogic {
+class AccountViewController: UIViewController {
     
     // MARK: - Properties
     var interactor: AccountBusinessLogic?
     var router: AccountRouterInput?
     
     // Mark: - Outlets
+    @IBOutlet weak var accountAddressLabel: UILabel!
+    @IBOutlet weak var balanceLabel: UILabel!
     
     //@IBOutlet weak var nameTextField: UITextField!
     
@@ -37,17 +39,13 @@ class AccountViewController: UIViewController, AccountDisplayLogic {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
+        interactor?.updateViews()
     }
-    
-    // MARK: - Do something
-    
-    func doSomething() {
-        let request = Account.Something.Request()
-        interactor?.doSomething(request)
-    }
-    
-    func displaySomething(_ viewModel: Account.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+}
+
+extension AccountViewController: AccountDisplayLogic {
+    func displayUpdatedViews(_ viewModel: Account.UpdateViews.ViewModel) {
+        accountAddressLabel.text = viewModel.accountAddress
+        balanceLabel.text = viewModel.balance
     }
 }

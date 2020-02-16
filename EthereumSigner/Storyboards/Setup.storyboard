@@ -34,7 +34,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Setup" largeTitleDisplayMode="always" id="V28-zG-Qp4"/>
                     <connections>
-                        <segue destination="xZm-og-YUk" kind="show" identifier="showAccount" id="Twh-Xc-ilh"/>
+                        <outlet property="privateKeyTextField" destination="mwQ-PI-xUR" id="BfY-Ej-BTe"/>
+                        <segue destination="xZm-og-YUk" kind="show" identifier="showAccountAndBalance" id="Twh-Xc-ilh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8fs-ma-9z0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

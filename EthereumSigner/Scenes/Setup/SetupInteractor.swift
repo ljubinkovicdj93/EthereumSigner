@@ -11,16 +11,21 @@
 //
 
 import UIKit
+import web3swift
+import BigInt
 
 protocol SetupBusinessLogic {
-    func doSomething(_ request: Setup.Something.Request)
+    func requestInitialState()
+    func createAccount(_ request: Setup.Account.Request) throws
 }
 
 protocol SetupDataStore {
-    //var name: String { get set }
+    var wallet: Wallet? { get set }
 }
 
 class SetupInteractor: SetupBusinessLogic, SetupDataStore {
+    
+    var wallet: Wallet?
     
     var presenter: SetupPresentationLogic?
     lazy var worker: SetupWorker? = {
@@ -28,12 +33,27 @@ class SetupInteractor: SetupBusinessLogic, SetupDataStore {
     }()
     //var name: String = ""
     
-    // MARK: Do something
+    // MARK: Business Logic
     
-    func doSomething(_ request: Setup.Something.Request) {
-        worker?.doSomeWork()
+    func requestInitialState() {
+        let onTextDidChangeClosure: (String) -> Void = { text in
+            print(text)
+        }
+        presenter?.presentInitialState(Setup.InitialState.Response(onTextDidChangeClosure: onTextDidChangeClosure))
+    }
+    
+    func createAccount(_ request: Setup.Account.Request) throws {
+        #warning("TODO: USE THIS INSTEAD!")
+//        let privateKey = request.privateKeyText
+        let privateKey = "A6E4AF5B2B8323E965876D94D9CE635723A8A7193E61000D241CDDEAA613F3E4" // Some private key
+        Web3Manager.shared.storePrivateKey(privateKey)
         
-        let response = Setup.Something.Response()
-        presenter?.presentSomething(response)
+        do {
+            let wallet = try Web3Manager.shared.getAccountAndBalance()
+            self.wallet = wallet
+            presenter?.presentAccountAndBalance(Setup.Account.Response(wallet: wallet))
+        } catch {
+            throw EthereumError.genericError(error.localizedDescription)
+        }
     }
 }

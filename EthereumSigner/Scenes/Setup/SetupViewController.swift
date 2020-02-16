@@ -13,18 +13,20 @@
 import UIKit
 
 protocol SetupDisplayLogic: class {
-    func displaySomething(_ viewModel: Setup.Something.ViewModel)
+    func displayInitialState(_ viewModel: Setup.InitialState.ViewModel)
+    func displayAccountAndBalance(_ viewModel: Setup.Account.ViewModel)
 }
 
-class SetupViewController: UIViewController, SetupDisplayLogic {
+class SetupViewController: UIViewController {
     
     // MARK: - Properties
     var interactor: SetupBusinessLogic?
     var router: SetupRouterInput?
+    private var validationConfiguration: ValidationConfiguration?
     
-    // Mark: - Outlets
+    // MARK: - Outlets
     
-    //@IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var privateKeyTextField: UITextField!
     
     // MARK: - Object Lifecycle
     
@@ -33,21 +35,32 @@ class SetupViewController: UIViewController, SetupDisplayLogic {
         SetupConfigurator.sharedInstance.configure(self)
     }
     
-    // MARK: - View lifecycle
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
+        
+        interactor?.requestInitialState()
+        
+        do {
+            try interactor?.createAccount(Setup.Account.Request(privateKeyText: "djoko"))
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
-    // MARK: - Do something
-    
-    func doSomething() {
-        let request = Setup.Something.Request()
-        interactor?.doSomething(request)
+}
+
+// MARK: - Display Logic
+
+extension SetupViewController: SetupDisplayLogic {
+    func displayInitialState(_ viewModel: Setup.InitialState.ViewModel) {
+        validationConfiguration = viewModel.validationConfiguration
+        validationConfiguration?.setup(privateKeyTextField)
     }
     
-    func displaySomething(_ viewModel: Setup.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+    func displayAccountAndBalance(_ viewModel: Setup.Account.ViewModel) {
+        router?.showAccountAndBalance()
     }
 }
+

@@ -15,12 +15,28 @@ import UIKit
 struct Setup {
     // MARK: Use cases
     
-    struct Something {
-        struct Request {
-        }
+    struct InitialState {
         struct Response {
+            var onTextDidChangeClosure: (String) -> Void
         }
+        
         struct ViewModel {
+            var validationConfiguration: ValidationConfiguration
+        }
+    }
+    
+    struct Account {
+        struct Request {
+            let privateKeyText: String
+        }
+        
+        struct Response {
+            let wallet: Wallet
+        }
+        
+        struct ViewModel {
+            let accountAddress: String
+            let walletBalance: String
         }
     }
 }

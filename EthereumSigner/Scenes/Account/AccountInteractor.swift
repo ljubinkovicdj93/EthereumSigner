@@ -13,14 +13,16 @@
 import UIKit
 
 protocol AccountBusinessLogic {
-    func doSomething(_ request: Account.Something.Request)
+    func updateViews()
 }
 
 protocol AccountDataStore {
-    //var name: String { get set }
+    var wallet: Wallet? { get set }
 }
 
 class AccountInteractor: AccountBusinessLogic, AccountDataStore {
+    
+    var wallet: Wallet?
     
     var presenter: AccountPresentationLogic?
     lazy var worker: AccountWorker? = {
@@ -29,11 +31,9 @@ class AccountInteractor: AccountBusinessLogic, AccountDataStore {
     //var name: String = ""
     
     // MARK: Do something
-    
-    func doSomething(_ request: Account.Something.Request) {
-        worker?.doSomeWork()
-        
-        let response = Account.Something.Response()
-        presenter?.presentSomething(response)
+
+    func updateViews() {
+        guard let wallet = wallet else { fatalError("Wallet should be initialized by this point.") }
+        presenter?.presentAccountAndBalance(Account.UpdateViews.Response(wallet: wallet))
     }
 }

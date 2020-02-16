@@ -88,6 +88,10 @@
                         <viewLayoutGuide key="safeArea" id="aCO-eR-feE"/>
                     </view>
                     <navigationItem key="navigationItem" title="Account" largeTitleDisplayMode="always" id="1RB-dY-Q0R"/>
+                    <connections>
+                        <outlet property="accountAddressLabel" destination="ZE1-Sd-iBh" id="5s9-cl-ulC"/>
+                        <outlet property="balanceLabel" destination="DRn-Z7-9Sv" id="2Kk-LO-uCC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ts6-fa-jMt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
