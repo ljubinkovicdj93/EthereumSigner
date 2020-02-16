@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,8 @@
 		9F77964623EF50E900E579B1 /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F77964523EF50E900E579B1 /* Account.storyboard */; };
 		9F77964823EF50FC00E579B1 /* Signing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F77964723EF50FC00E579B1 /* Signing.storyboard */; };
 		9F77964A23EF510D00E579B1 /* Verification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F77964923EF510D00E579B1 /* Verification.storyboard */; };
+		9F8ADFD823F94F830075FBA3 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8ADFD723F94F830075FBA3 /* StringExtensions.swift */; };
+		9F8ADFDB23F95BF00075FBA3 /* ValidatableTextFieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8ADFDA23F95BF00075FBA3 /* ValidatableTextFieldConfiguration.swift */; };
 		9FAE315D23EEE68A004F3D72 /* SetupPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE315623EEE68A004F3D72 /* SetupPresenter.swift */; };
 		9FAE315E23EEE68A004F3D72 /* SetupWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE315723EEE68A004F3D72 /* SetupWorker.swift */; };
 		9FAE315F23EEE68A004F3D72 /* SetupRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE315823EEE68A004F3D72 /* SetupRouter.swift */; };
@@ -74,6 +76,8 @@
 		9F77964523EF50E900E579B1 /* Account.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
 		9F77964723EF50FC00E579B1 /* Signing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signing.storyboard; sourceTree = "<group>"; };
 		9F77964923EF510D00E579B1 /* Verification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Verification.storyboard; sourceTree = "<group>"; };
+		9F8ADFD723F94F830075FBA3 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		9F8ADFDA23F95BF00075FBA3 /* ValidatableTextFieldConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatableTextFieldConfiguration.swift; sourceTree = "<group>"; };
 		9FAE315623EEE68A004F3D72 /* SetupPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupPresenter.swift; sourceTree = "<group>"; };
 		9FAE315723EEE68A004F3D72 /* SetupWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWorker.swift; sourceTree = "<group>"; };
 		9FAE315823EEE68A004F3D72 /* SetupRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupRouter.swift; sourceTree = "<group>"; };
@@ -136,7 +140,6 @@
 				494667A796BED8369D5544C7 /* Pods-EthereumSigner.debug.xcconfig */,
 				8BF10A22CF6AA96B843E6783 /* Pods-EthereumSigner.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -169,6 +172,8 @@
 		9F1E818D23EED47900F0969D /* EthereumSigner */ = {
 			isa = PBXGroup;
 			children = (
+				9F8ADFD923F95BE90075FBA3 /* ValidatableTextField */,
+				9F8ADFD623F94F760075FBA3 /* Extensions */,
 				9FAE314123EEE5ED004F3D72 /* Scenes */,
 				9FAE31AA23EEE701004F3D72 /* Storyboards */,
 				9F1E818E23EED47900F0969D /* AppDelegate.swift */,
@@ -177,6 +182,22 @@
 				9F1E819C23EED47A00F0969D /* Info.plist */,
 			);
 			path = EthereumSigner;
+			sourceTree = "<group>";
+		};
+		9F8ADFD623F94F760075FBA3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9F8ADFD723F94F830075FBA3 /* StringExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9F8ADFD923F95BE90075FBA3 /* ValidatableTextField */ = {
+			isa = PBXGroup;
+			children = (
+				9F8ADFDA23F95BF00075FBA3 /* ValidatableTextFieldConfiguration.swift */,
+			);
+			path = ValidatableTextField;
 			sourceTree = "<group>";
 		};
 		9FAE314123EEE5ED004F3D72 /* Scenes */ = {
@@ -417,7 +438,9 @@
 				9FAE31A423EEE6C6004F3D72 /* QRCodeScannerWorker.swift in Sources */,
 				9FAE316F23EEE695004F3D72 /* AccountViewController.swift in Sources */,
 				9FAE318923EEE6AE004F3D72 /* SignatureRouter.swift in Sources */,
+				9F8ADFDB23F95BF00075FBA3 /* ValidatableTextFieldConfiguration.swift in Sources */,
 				9F1E819323EED47900F0969D /* ViewController.swift in Sources */,
+				9F8ADFD823F94F830075FBA3 /* StringExtensions.swift in Sources */,
 				9FAE319523EEE6B9004F3D72 /* VerificationPresenter.swift in Sources */,
 				9FAE31A523EEE6C6004F3D72 /* QRCodeScannerRouter.swift in Sources */,
 				9FAE317123EEE695004F3D72 /* AccountConfigurator.swift in Sources */,
