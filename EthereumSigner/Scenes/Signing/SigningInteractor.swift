@@ -13,27 +13,30 @@
 import UIKit
 
 protocol SigningBusinessLogic {
-    func doSomething(_ request: Signing.Something.Request)
+    func signMessage(_ request: Signing.Signature.Request)
 }
 
 protocol SigningDataStore {
-    //var name: String { get set }
+    var signedMessage: String { get set }
+    var imageData: Data? { get set }
 }
 
 class SigningInteractor: SigningBusinessLogic, SigningDataStore {
+    
+    var signedMessage: String = .empty
+    var imageData: Data?
     
     var presenter: SigningPresentationLogic?
     lazy var worker: SigningWorker? = {
         return SigningWorker()
     }()
-    //var name: String = ""
     
-    // MARK: Do something
+    // MARK: Business Logic
     
-    func doSomething(_ request: Signing.Something.Request) {
-        worker?.doSomeWork()
+    func signMessage(_ request: Signing.Signature.Request) {
+        signedMessage = request.signedMessage
+        imageData = worker?.signedMessageData(signedMessage)
         
-        let response = Signing.Something.Response()
-        presenter?.presentSomething(response)
+        presenter?.presentSignMessage(Signing.Signature.Response(signedMessage: signedMessage))
     }
 }

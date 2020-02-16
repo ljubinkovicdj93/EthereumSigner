@@ -15,12 +15,15 @@ import UIKit
 struct Signature {
     // MARK: Use cases
     
-    struct Something {
-        struct Request {
-        }
+    struct InitialState {
         struct Response {
+            let signedMessage: String
+            let qrCodeImage: UIImage?
         }
+        
         struct ViewModel {
+            let signedMessageLabelStyle: UIViewStyle<UILabel>
+            let imageViewStyle: UIViewStyle<UIImageView>
         }
     }
 }

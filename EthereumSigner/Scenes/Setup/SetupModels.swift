@@ -19,11 +19,11 @@ struct Setup {
         struct Response {
             let maximumCharactersAllowed: MaximumCharactersAllowed
             let onTextDidChangeClosure: (String) -> Void
-            let validationState: ValidationState = .none
+            let textValidator: TextValidator
         }
         
         struct ViewModel {
-            var validationConfiguration: ValidationConfiguration
+            let validationConfiguration: ValidationConfiguration
             let errorLabelStyle: UIViewStyle<UILabel>
             let buttonStyle: UIViewStyle<UIButton>
         }

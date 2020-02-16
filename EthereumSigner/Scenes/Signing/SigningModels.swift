@@ -15,12 +15,12 @@ import UIKit
 struct Signing {
     // MARK: Use cases
     
-    struct Something {
+    struct Signature {
         struct Request {
+            let signedMessage: String
         }
-        struct Response {
-        }
-        struct ViewModel {
-        }
+        
+        typealias Response = Request
+        typealias ViewModel = Response
     }
 }

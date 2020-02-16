@@ -28,7 +28,6 @@ class SetupInteractor: SetupBusinessLogic, SetupDataStore {
     private struct Constants {
         static let HexCode = "0x"
         static let MaximumCharactersAllowed: Int = 64
-        static let AllZeroCharacters: String = Array(repeating: "0", count: Constants.MaximumCharactersAllowed).joined(separator: .empty)
         
         struct Error {
             static let Message: String = "Invalid private key. Enter at least 64 alphanumeric letters, or 66 if the first two are `0x`"
@@ -45,23 +44,16 @@ class SetupInteractor: SetupBusinessLogic, SetupDataStore {
     // MARK: Business Logic
     
     func requestInitialState() {
+        let privateKeyTextValidator = TextValidator.EthereumPrivateKeyValidator
+        
         let onTextDidChangeClosure: (String) -> Void = { [weak self] text in guard let self = self else { return }
-            let isHexEntered = text.hasPrefix(Constants.HexCode)
-            let maxCharactersAllowed = isHexEntered ? Constants.MaximumCharactersAllowed + 2 : Constants.MaximumCharactersAllowed
-            let allZeros = isHexEntered ? "\(Constants.HexCode)\(Constants.AllZeroCharacters)" : Constants.AllZeroCharacters
+            let additionalCharacterCountToAllow = text.hasPrefix(Constants.HexCode) ? 2 : 0
             
-            let validationState: ValidationState
-            if text.count == maxCharactersAllowed && text.isAlphanumeric && text != allZeros {
-                validationState = .valid
-            } else if text.isEmpty {
-                validationState = .none
-            } else {
-                validationState = .invalid(Constants.Error.Message)
-            }
-            
-            self.presenter?.presentValidationDidChange(Setup.ValidationChange.Response(validationState: validationState, maximumCharactersAllowed: .limited(maxCharactersAllowed)))
+            self.presenter?.presentValidationDidChange(Setup.ValidationChange.Response(validationState: privateKeyTextValidator.onValidate(text),
+                                                                                       maximumCharactersAllowed: .limited(Constants.MaximumCharactersAllowed + additionalCharacterCountToAllow)))
         }
-        presenter?.presentInitialState(Setup.InitialState.Response(maximumCharactersAllowed: .limited(Constants.MaximumCharactersAllowed), onTextDidChangeClosure: onTextDidChangeClosure))
+        
+        presenter?.presentInitialState(Setup.InitialState.Response(maximumCharactersAllowed: .limited(Constants.MaximumCharactersAllowed), onTextDidChangeClosure: onTextDidChangeClosure, textValidator: privateKeyTextValidator))
     }
     
     func createAccount(_ request: Setup.Account.Request) throws {

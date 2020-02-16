@@ -13,18 +13,19 @@
 import UIKit
 
 protocol SigningDisplayLogic: class {
-    func displaySomething(_ viewModel: Signing.Something.ViewModel)
+    func displaySignedMessage(_ viewModel: Signing.Signature.ViewModel)
 }
 
-class SigningViewController: UIViewController, SigningDisplayLogic {
+class SigningViewController: UIViewController {
     
     // MARK: - Properties
+    
     var interactor: SigningBusinessLogic?
     var router: SigningRouterInput?
     
-    // Mark: - Outlets
+    // MARK: - Outlets
     
-    //@IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var signMessageTextField: UITextField!
     
     // MARK: - Object Lifecycle
     
@@ -33,21 +34,29 @@ class SigningViewController: UIViewController, SigningDisplayLogic {
         SigningConfigurator.sharedInstance.configure(self)
     }
     
-    // MARK: - View lifecycle
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
     }
     
-    // MARK: - Do something
-    
-    func doSomething() {
-        let request = Signing.Something.Request()
-        interactor?.doSomething(request)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        handleKeyboard()
+        hideKeyboardWhenTappedAround()
     }
     
-    func displaySomething(_ viewModel: Signing.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+    // MARK: - Actions
+    
+    @IBAction func signMessageTapped(_ sender: UIButton) {
+        guard let text = signMessageTextField.text else { return }
+        print("CURR TEXT: \(text)")
+        interactor?.signMessage(Signing.Signature.Request(signedMessage: text))
+    }
+}
+
+extension SigningViewController: SigningDisplayLogic {
+    func displaySignedMessage(_ viewModel: Signing.Signature.ViewModel) {
+        router?.showSignature()
     }
 }

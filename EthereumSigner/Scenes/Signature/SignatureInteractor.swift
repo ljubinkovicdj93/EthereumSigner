@@ -13,27 +13,28 @@
 import UIKit
 
 protocol SignatureBusinessLogic {
-    func doSomething(_ request: Signature.Something.Request)
+    func requestInitialState()
 }
 
 protocol SignatureDataStore {
-    //var name: String { get set }
+    var signedMessage: String? { get set }
+    var imageData: Data? { get set }
 }
 
 class SignatureInteractor: SignatureBusinessLogic, SignatureDataStore {
+    
+    var signedMessage: String?
+    var imageData: Data?
     
     var presenter: SignaturePresentationLogic?
     lazy var worker: SignatureWorker? = {
         return SignatureWorker()
     }()
-    //var name: String = ""
     
-    // MARK: Do something
+    // MARK: Business Logic
     
-    func doSomething(_ request: Signature.Something.Request) {
-        worker?.doSomeWork()
-        
-        let response = Signature.Something.Response()
-        presenter?.presentSomething(response)
+    func requestInitialState() {
+        presenter?.presentInitialState(Signature.InitialState.Response(signedMessage: "Message: \(signedMessage ?? .empty)",
+                                                                       qrCodeImage: worker?.generateQRCode(from: imageData)))
     }
 }

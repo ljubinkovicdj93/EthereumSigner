@@ -13,18 +13,20 @@
 import UIKit
 
 protocol SignatureDisplayLogic: class {
-    func displaySomething(_ viewModel: Signature.Something.ViewModel)
+    func displayInitialState(_ viewModel: Signature.InitialState.ViewModel)
 }
 
-class SignatureViewController: UIViewController, SignatureDisplayLogic {
+class SignatureViewController: UIViewController {
     
     // MARK: - Properties
+    
     var interactor: SignatureBusinessLogic?
     var router: SignatureRouterInput?
     
-    // Mark: - Outlets
+    // MARK: - Outlets
     
-    //@IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var signedMessageLabel: UILabel!
+    @IBOutlet weak var qrCodeImageView: UIImageView!
     
     // MARK: - Object Lifecycle
     
@@ -33,21 +35,17 @@ class SignatureViewController: UIViewController, SignatureDisplayLogic {
         SignatureConfigurator.sharedInstance.configure(self)
     }
     
-    // MARK: - View lifecycle
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
+        interactor?.requestInitialState()
     }
-    
-    // MARK: - Do something
-    
-    func doSomething() {
-        let request = Signature.Something.Request()
-        interactor?.doSomething(request)
-    }
-    
-    func displaySomething(_ viewModel: Signature.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+}
+
+extension SignatureViewController: SignatureDisplayLogic {
+    func displayInitialState(_ viewModel: Signature.InitialState.ViewModel) {
+        viewModel.signedMessageLabelStyle.apply(to: signedMessageLabel)
+        viewModel.imageViewStyle.apply(to: qrCodeImageView)
     }
 }

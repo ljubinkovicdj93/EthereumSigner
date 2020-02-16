@@ -20,7 +20,7 @@ class AccountPresenter: AccountPresentationLogic {
     
     weak var viewController: AccountDisplayLogic?
     
-    // MARK: Do something
+    // MARK: Presentation Logic
     
     func presentAccountAndBalance(_ response: Account.UpdateViews.Response) {
         let viewModel = Account.UpdateViews.ViewModel(accountAddress: response.wallet.accountAddress,

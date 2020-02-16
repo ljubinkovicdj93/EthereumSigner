@@ -28,9 +28,8 @@ class AccountInteractor: AccountBusinessLogic, AccountDataStore {
     lazy var worker: AccountWorker? = {
         return AccountWorker()
     }()
-    //var name: String = ""
     
-    // MARK: Do something
+    // MARK: Business Logic
 
     func updateViews() {
         guard let wallet = wallet else { fatalError("Wallet should be initialized by this point.") }

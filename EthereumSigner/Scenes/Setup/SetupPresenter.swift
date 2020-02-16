@@ -63,10 +63,11 @@ class SetupPresenter: SetupPresentationLogic {
     
     func presentInitialState(_ response: Setup.InitialState.Response) {
         let validationConfiguration = ValidationConfiguration(maximumCharactersAllowed: response.maximumCharactersAllowed,
+                                                              textValidator: response.textValidator,
                                                               onTextDidChangeCompletion: response.onTextDidChangeClosure)
         let viewModel = Setup.InitialState.ViewModel(validationConfiguration: validationConfiguration,
-                                                     errorLabelStyle: errorLabelStyleHandler(response.validationState),
-                                                     buttonStyle: buttonStyleHandler(response.validationState))
+                                                     errorLabelStyle: errorLabelStyleHandler(validationConfiguration.currentValidationState),
+                                                     buttonStyle: buttonStyleHandler(validationConfiguration.currentValidationState))
         viewController?.displayInitialState(viewModel)
     }
     

@@ -13,17 +13,16 @@
 import UIKit
 
 protocol SigningPresentationLogic {
-    func presentSomething(_ response: Signing.Something.Response)
+    func presentSignMessage(_ response: Signing.Signature.Response)
 }
 
 class SigningPresenter: SigningPresentationLogic {
     
     weak var viewController: SigningDisplayLogic?
     
-    // MARK: Do something
+    // MARK: Presentation Logic
     
-    func presentSomething(_ response: Signing.Something.Response) {
-        let viewModel = Signing.Something.ViewModel()
-        viewController?.displaySomething(viewModel)
+    func presentSignMessage(_ response: Signing.Signature.Response) {
+        viewController?.displaySignedMessage(response)
     }
 }

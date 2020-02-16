@@ -19,14 +19,14 @@ protocol AccountDisplayLogic: class {
 class AccountViewController: UIViewController {
     
     // MARK: - Properties
+    
     var interactor: AccountBusinessLogic?
     var router: AccountRouterInput?
     
-    // Mark: - Outlets
+    // MARK: - Outlets
+    
     @IBOutlet weak var accountAddressLabel: UILabel!
     @IBOutlet weak var balanceLabel: UILabel!
-    
-    //@IBOutlet weak var nameTextField: UITextField!
     
     // MARK: - Object Lifecycle
     
@@ -35,13 +35,15 @@ class AccountViewController: UIViewController {
         AccountConfigurator.sharedInstance.configure(self)
     }
     
-    // MARK: - View lifecycle
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor?.updateViews()
     }
 }
+
+// MARK: Display Logic
 
 extension AccountViewController: AccountDisplayLogic {
     func displayUpdatedViews(_ viewModel: Account.UpdateViews.ViewModel) {

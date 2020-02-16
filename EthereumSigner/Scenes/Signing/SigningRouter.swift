@@ -13,7 +13,7 @@
 import UIKit
 
 protocol SigningRoutingNavigation {
-    func showNewScreen()
+    func showSignature()
 }
 
 protocol SigningDataPassing {
@@ -26,7 +26,7 @@ typealias SigningRouterInput = SigningRoutingNavigation & SigningDataPassing
 class SigningRouter: SigningRouterInput {
     
     private struct Segues {
-        static let ShowNextScreenIdentifier = ""
+        static let ShowSignatureIdentifier = "showSignature"
     }
     
     var dataStore: SigningDataStore?
@@ -34,15 +34,18 @@ class SigningRouter: SigningRouterInput {
     
     // MARK: Navigation
     
-    func showNewScreen() {
-        viewController?.performSegue(withIdentifier: Segues.ShowNextScreenIdentifier, sender: nil)
+    func showSignature() {
+        viewController?.performSegue(withIdentifier: Segues.ShowSignatureIdentifier, sender: nil)
     }
     
     // MARK: Passing data
     
     func passDataToNextScene(segue: UIStoryboardSegue) {
-        if segue.identifier == Segues.ShowNextScreenIdentifier {
-            // Pass Relevant Data
+        if segue.identifier == Segues.ShowSignatureIdentifier,
+            let signatureViewController = segue.destination as? SignatureViewController {
+            
+            signatureViewController.router?.dataStore?.signedMessage = dataStore?.signedMessage
+            signatureViewController.router?.dataStore?.imageData = dataStore?.imageData
         }
     }
 }

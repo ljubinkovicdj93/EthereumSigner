@@ -13,17 +13,25 @@
 import UIKit
 
 protocol SignaturePresentationLogic {
-    func presentSomething(_ response: Signature.Something.Response)
+    func presentInitialState(_ response: Signature.InitialState.Response)
 }
 
 class SignaturePresenter: SignaturePresentationLogic {
     
     weak var viewController: SignatureDisplayLogic?
     
-    // MARK: Do something
+    // MARK: Presentation Logic
     
-    func presentSomething(_ response: Signature.Something.Response) {
-        let viewModel = Signature.Something.ViewModel()
-        viewController?.displaySomething(viewModel)
+    func presentInitialState(_ response: Signature.InitialState.Response) {
+        let signedMessageLabelStyle = UIViewStyle<UILabel> { label in
+            label.text = response.signedMessage
+        }
+        
+        let imageViewStyle = UIViewStyle<UIImageView> { imageView in
+            imageView.image = response.qrCodeImage
+        }
+        
+        viewController?.displayInitialState(Signature.InitialState.ViewModel(signedMessageLabelStyle: signedMessageLabelStyle,
+                                                                             imageViewStyle: imageViewStyle))
     }
 }

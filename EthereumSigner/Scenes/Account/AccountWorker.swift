@@ -12,8 +12,4 @@
 
 import UIKit
 
-class AccountWorker {
-    
-    func doSomeWork() {
-    }
-}
+class AccountWorker {}

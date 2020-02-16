@@ -13,7 +13,10 @@
 import UIKit
 
 class SigningWorker {
-    
-    func doSomeWork() {
+    func signedMessageData(_ message: String) -> Data? {
+        if let signedData = Web3Manager.shared.signMessage(message) {
+            return signedData
+        }
+        return nil
     }
 }

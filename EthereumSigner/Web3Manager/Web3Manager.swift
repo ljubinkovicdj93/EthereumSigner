@@ -21,7 +21,13 @@ enum EthereumError: Error {
 class Web3Manager {
     static let shared = Web3Manager()
     
-    private var privateKey: String?
+    private var privateKey: String? {
+        didSet {
+            guard let privateKey = self.privateKey else { return }
+            self.privateKeyData = Data.fromHex(privateKey)
+            try? storeKeystore()
+        }
+    }
 //    {
 //        get {
 //            if Keychain.contains.privateKey {
@@ -31,6 +37,9 @@ class Web3Manager {
 //            }
 //        }
 //    }
+    
+    private var privateKeyData: Data?
+    private var keystore: EthereumKeystoreV3?
     private var accountAddress: String?
     
     lazy var provider: web3 = Web3.InfuraRinkebyWeb3()
@@ -46,14 +55,20 @@ class Web3Manager {
         self.accountAddress = accountAddress
     }
     
+    func storeKeystore() throws {
+        do {
+            guard let privateKeyData = self.privateKeyData else { return }
+            self.keystore = try EthereumKeystoreV3(privateKey: privateKeyData)
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+    
     func getAccountAndBalance() throws -> Wallet {
-        guard let privateKey = self.privateKey else { fatalError("Need to store private key first.") }
-        
-        guard let dataKey = Data.fromHex(privateKey) else { throw EthereumError.invalidPrivateKey(privateKey) }
+        guard self.privateKey != nil else { fatalError("Need to store private key first.") }
         
         do {
-            guard let keystore = try EthereumKeystoreV3(privateKey: dataKey) else { throw EthereumError.initializeKeystoreFail(dataKey.toHexString()) }
-            guard let accountAddress = keystore.getAddress() else { throw EthereumError.noAccountAddressFound }
+            guard let accountAddress = self.keystore?.getAddress() else { throw EthereumError.noAccountAddressFound }
             guard let walletBalance = try? provider.eth.getBalance(address: accountAddress) else { throw EthereumError.noBalanceAvailable }
             
             storeAccountAddress(accountAddress.address)
@@ -63,6 +78,24 @@ class Web3Manager {
             return wallet
         } catch {
             throw EthereumError.genericError(error.localizedDescription)
+        }
+    }
+    
+    func signMessage(_ message: String) -> Data? {
+        guard let keystore = self.keystore else { return nil }
+        
+        let keystoreManager = KeystoreManager([keystore])
+        provider.addKeystoreManager(keystoreManager)
+        
+        guard let addresses = keystoreManager.addresses else { return nil }
+        do {
+            guard let messageData = message.data(using: .utf8) else { return nil }
+            let signedData = try provider.personal.signPersonalMessage(message: messageData, from: addresses[0])
+            let signedBase64Data = signedData.base64EncodedData()
+            
+            return signedBase64Data
+        } catch {
+            fatalError(error.localizedDescription)
         }
     }
 }

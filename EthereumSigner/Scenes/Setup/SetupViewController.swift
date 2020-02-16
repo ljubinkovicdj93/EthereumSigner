@@ -45,13 +45,8 @@ class SetupViewController: UIViewController {
         
         interactor?.requestInitialState()
         
-        
-        
-//        do {
-//            try interactor?.createAccount(Setup.Account.Request(privateKeyText: "djoko"))
-//        } catch {
-//            print(error.localizedDescription)
-//        }
+        #warning("TODO: REMOVE!!!")
+        privateKeyTextField.text = "A6E4AF5B2B8323E965876D94D9CE635723A8A7193E61000D241CDDEAA613F3E4"
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -64,6 +59,7 @@ class SetupViewController: UIViewController {
     
     @IBAction func onNextButtonTapped(_ sender: UIButton) {
         guard let validationConfiguration = self.validationConfiguration else { return }
+        
         do {
             try interactor?.createAccount(Setup.Account.Request(privateKeyText: validationConfiguration.currentText))
         } catch {
@@ -81,6 +77,10 @@ extension SetupViewController: SetupDisplayLogic {
         
         viewModel.buttonStyle.apply(to: nextButton)
         viewModel.errorLabelStyle.apply(to: errorMessageLabel)
+        
+        #warning("TODO: REMOVE!!!")
+        nextButton.backgroundColor = .systemBlue
+        nextButton.isEnabled = true
     }
     
     func displayValidationDidChange(_ viewModel: Setup.ValidationChange.ViewModel) {

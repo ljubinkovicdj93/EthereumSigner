@@ -15,6 +15,7 @@
 		9F77964623EF50E900E579B1 /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F77964523EF50E900E579B1 /* Account.storyboard */; };
 		9F77964823EF50FC00E579B1 /* Signing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F77964723EF50FC00E579B1 /* Signing.storyboard */; };
 		9F77964A23EF510D00E579B1 /* Verification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F77964923EF510D00E579B1 /* Verification.storyboard */; };
+		9F7F981B23F9FBAE00C2D0A9 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7F981A23F9FBAE00C2D0A9 /* DataExtensions.swift */; };
 		9F8ADFD823F94F830075FBA3 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8ADFD723F94F830075FBA3 /* StringExtensions.swift */; };
 		9F8ADFDB23F95BF00075FBA3 /* ValidatableTextFieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8ADFDA23F95BF00075FBA3 /* ValidatableTextFieldConfiguration.swift */; };
 		9F8ADFDE23F97FAA0075FBA3 /* Web3Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8ADFDD23F97FAA0075FBA3 /* Web3Manager.swift */; };
@@ -79,6 +80,7 @@
 		9F77964523EF50E900E579B1 /* Account.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
 		9F77964723EF50FC00E579B1 /* Signing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signing.storyboard; sourceTree = "<group>"; };
 		9F77964923EF510D00E579B1 /* Verification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Verification.storyboard; sourceTree = "<group>"; };
+		9F7F981A23F9FBAE00C2D0A9 /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		9F8ADFD723F94F830075FBA3 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		9F8ADFDA23F95BF00075FBA3 /* ValidatableTextFieldConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatableTextFieldConfiguration.swift; sourceTree = "<group>"; };
 		9F8ADFDD23F97FAA0075FBA3 /* Web3Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3Manager.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 			children = (
 				9F8ADFD723F94F830075FBA3 /* StringExtensions.swift */,
 				9F8ADFE223F996980075FBA3 /* UIViewControllerExtensions.swift */,
+				9F7F981A23F9FBAE00C2D0A9 /* DataExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				9FAE317E23EEE6A2004F3D72 /* SigningInteractor.swift in Sources */,
 				9F8ADFDE23F97FAA0075FBA3 /* Web3Manager.swift in Sources */,
 				9FAE319B23EEE6B9004F3D72 /* VerificationConfigurator.swift in Sources */,
+				9F7F981B23F9FBAE00C2D0A9 /* DataExtensions.swift in Sources */,
 				9FAE317D23EEE6A2004F3D72 /* SigningViewController.swift in Sources */,
 				9FAE317923EEE6A2004F3D72 /* SigningPresenter.swift in Sources */,
 				9FAE317C23EEE6A2004F3D72 /* SigningModels.swift in Sources */,

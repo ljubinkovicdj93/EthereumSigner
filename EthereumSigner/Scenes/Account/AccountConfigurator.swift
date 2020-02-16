@@ -20,6 +20,7 @@ extension AccountViewController {
 }
 
 // MARK: - Connects View, Interactor, and Presenter
+
 class AccountConfigurator {
     
     static let sharedInstance = AccountConfigurator()

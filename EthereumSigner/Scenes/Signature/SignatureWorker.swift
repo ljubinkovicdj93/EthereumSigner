@@ -14,6 +14,9 @@ import UIKit
 
 class SignatureWorker {
     
-    func doSomeWork() {
+    func generateQRCode(from data: Data?) -> UIImage? {
+        guard let data = data else { return nil }
+        
+        return data.qrCodeImage
     }
 }
