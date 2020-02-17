@@ -27,6 +27,11 @@ class Web3Manager {
         didSet {
             guard let privateKey = self.privateKey else { return }
             self.privateKeyData = Data.fromHex(privateKey)
+            
+            if let privateKeyDataKeychain = privateKey.data(using: .utf8) {
+                let _ = KeychainManager.save(key: KeychainKey.ethereumPrivateKey.rawValue, data: privateKeyDataKeychain)
+            }
+
             try? storeKeystore()
         }
     }

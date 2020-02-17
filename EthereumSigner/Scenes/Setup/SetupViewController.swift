@@ -43,7 +43,10 @@ class SetupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        interactor?.requestInitialState()
+        // Uncomment to always show setup screen first.
+//        KeychainManager.deleteKeys()
+        
+        performInitialCheck()
         
         #warning("TODO: REMOVE!!!")
         privateKeyTextField.text = "A6E4AF5B2B8323E965876D94D9CE635723A8A7193E61000D241CDDEAA613F3E4"
@@ -55,13 +58,30 @@ class SetupViewController: UIViewController {
         hideKeyboardWhenTappedAround()
     }
     
+    private func performInitialCheck() {
+        if case let .privateKeyExists(privateKeyData) = RoutingService.shared.resolveInitialState() {
+            let privateKey = String(decoding: privateKeyData, as: UTF8.self)
+            guard !privateKey.isEmpty else {
+                assertionFailure("Couldn't decode private key data from Keychain.")
+                interactor?.requestInitialState()
+                return
+            }
+            createAccount(privateKey)
+        } else {
+            interactor?.requestInitialState()
+        }
+    }
+    
     // MARK: - Actions
     
     @IBAction func onNextButtonTapped(_ sender: UIButton) {
         guard let validationConfiguration = self.validationConfiguration else { return }
-        
+        createAccount(validationConfiguration.currentText)
+    }
+    
+    private func createAccount(_ privateKey: String) {
         do {
-            try interactor?.createAccount(Setup.Account.Request(privateKeyText: validationConfiguration.currentText))
+            try interactor?.createAccount(Setup.Account.Request(privateKeyText: privateKey))
         } catch {
             print("Something went wrong: \(error.localizedDescription)")
         }
