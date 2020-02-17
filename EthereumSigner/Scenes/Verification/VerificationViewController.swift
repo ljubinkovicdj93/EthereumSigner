@@ -13,18 +13,24 @@
 import UIKit
 
 protocol VerificationDisplayLogic: class {
-    func displaySomething(_ viewModel: Verification.Something.ViewModel)
+    func displayInitialState(_ viewModel: Verification.InitialState.ViewModel)
+    func displayValidationDidChange(_ viewModel: Verification.ValidationChange.ViewModel)
+    func displayVerification()
 }
 
-class VerificationViewController: UIViewController, VerificationDisplayLogic {
+class VerificationViewController: UIViewController {
     
     // MARK: - Properties
+    
     var interactor: VerificationBusinessLogic?
     var router: VerificationRouterInput?
     
-    // Mark: - Outlets
+    private var validationConfiguration: ValidationConfiguration?
     
-    //@IBOutlet weak var nameTextField: UITextField!
+    // MARK: - Outlets
+    
+    @IBOutlet weak var verificationMessageTextField: UITextField!
+    @IBOutlet weak var verifyButton: UIButton!
     
     // MARK: - Object Lifecycle
     
@@ -33,21 +39,35 @@ class VerificationViewController: UIViewController, VerificationDisplayLogic {
         VerificationConfigurator.sharedInstance.configure(self)
     }
     
-    // MARK: - View lifecycle
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
+        interactor?.requestInitialState()
     }
     
-    // MARK: - Do something
+    // MARK: - Actions
     
-    func doSomething() {
-        let request = Verification.Something.Request()
-        interactor?.doSomething(request)
+    @IBAction func onVerifyTapped(_ sender: UIButton) {
+        guard let text = verificationMessageTextField.text else { return }
+        interactor?.verifyMessage(Verification.Verify.Request(verificationMessage: text))
+    }
+}
+
+// MARK: - Display Logic
+
+extension VerificationViewController: VerificationDisplayLogic {
+    func displayInitialState(_ viewModel: Verification.InitialState.ViewModel) {
+        validationConfiguration = viewModel.validationConfiguration
+        validationConfiguration?.setup(verificationMessageTextField)
+        viewModel.buttonStyle.apply(to: verifyButton)
     }
     
-    func displaySomething(_ viewModel: Verification.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+    func displayValidationDidChange(_ viewModel: Verification.ValidationChange.ViewModel) {
+        viewModel.buttonStyle.apply(to: verifyButton)
+    }
+    
+    func displayVerification() {
+        router?.showQrCodeScanner()
     }
 }

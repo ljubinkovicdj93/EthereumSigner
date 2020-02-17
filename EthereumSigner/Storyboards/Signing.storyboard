@@ -44,6 +44,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Signing" largeTitleDisplayMode="always" id="msJ-wU-g4R"/>
                     <connections>
+                        <outlet property="signMessageButton" destination="9Gv-TY-ekE" id="3oJ-OH-bnb"/>
                         <outlet property="signMessageTextField" destination="hWB-Xm-V5b" id="w1F-ap-BK2"/>
                         <segue destination="lRC-at-ErA" kind="show" identifier="showSignature" id="5jm-KR-61n"/>
                     </connections>

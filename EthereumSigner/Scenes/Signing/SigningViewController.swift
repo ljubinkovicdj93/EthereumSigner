@@ -13,7 +13,9 @@
 import UIKit
 
 protocol SigningDisplayLogic: class {
-    func displaySignedMessage(_ viewModel: Signing.Signature.ViewModel)
+    func displayInitialState(_ viewModel: Signing.InitialState.ViewModel)
+    func displayValidationDidChange(_ viewModel: Signing.ValidationChange.ViewModel)
+    func displaySignedMessage()
 }
 
 class SigningViewController: UIViewController {
@@ -23,9 +25,12 @@ class SigningViewController: UIViewController {
     var interactor: SigningBusinessLogic?
     var router: SigningRouterInput?
     
+    private var validationConfiguration: ValidationConfiguration?
+    
     // MARK: - Outlets
     
     @IBOutlet weak var signMessageTextField: UITextField!
+    @IBOutlet weak var signMessageButton: UIButton!
     
     // MARK: - Object Lifecycle
     
@@ -38,6 +43,7 @@ class SigningViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        interactor?.requestInitialState()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -50,13 +56,22 @@ class SigningViewController: UIViewController {
     
     @IBAction func signMessageTapped(_ sender: UIButton) {
         guard let text = signMessageTextField.text else { return }
-        print("CURR TEXT: \(text)")
         interactor?.signMessage(Signing.Signature.Request(signedMessage: text))
     }
 }
 
 extension SigningViewController: SigningDisplayLogic {
-    func displaySignedMessage(_ viewModel: Signing.Signature.ViewModel) {
+    func displayInitialState(_ viewModel: Signing.InitialState.ViewModel) {
+        validationConfiguration = viewModel.validationConfiguration
+        validationConfiguration?.setup(signMessageTextField)
+        viewModel.buttonStyle.apply(to: signMessageButton)
+    }
+        
+    func displayValidationDidChange(_ viewModel: Signing.ValidationChange.ViewModel) {
+        viewModel.buttonStyle.apply(to: signMessageButton)
+    }
+    
+    func displaySignedMessage() {
         router?.showSignature()
     }
 }

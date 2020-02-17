@@ -13,16 +13,51 @@
 import UIKit
 
 protocol SigningPresentationLogic {
-    func presentSignMessage(_ response: Signing.Signature.Response)
+    func presentInitialState(_ response: Signing.InitialState.Response)
+    func presentSignMessage()
+    func presentValidationDidChange(_ response: Signing.ValidationChange.Response)
 }
 
 class SigningPresenter: SigningPresentationLogic {
     
+    private struct Constants {
+        static let ButtonTitle: String = "Sign Message"
+    }
+    
     weak var viewController: SigningDisplayLogic?
+    
+    private var buttonStyleHandler: (ValidationState) -> UIViewStyle<UIButton> = { validationState in
+        return UIViewStyle<UIButton> { button in
+            var isEnabled: Bool = false
+            
+            switch validationState {
+            case .none, .invalid:
+                button.backgroundColor = .lightGray
+            case .valid:
+                isEnabled = true
+                button.backgroundColor = .systemBlue
+            }
+            
+            button.setTitleColor(.white, for: .normal)
+            button.setTitle(Constants.ButtonTitle, for: .normal)
+            button.isEnabled = isEnabled
+        }
+    }
     
     // MARK: Presentation Logic
     
-    func presentSignMessage(_ response: Signing.Signature.Response) {
-        viewController?.displaySignedMessage(response)
+    func presentInitialState(_ response: Signing.InitialState.Response) {
+        let validationConfiguration = ValidationConfiguration(textValidator: response.textValidator, onTextDidChangeCompletion: response.onTextDidChangeClosure)
+        let viewModel = Signing.InitialState.ViewModel(validationConfiguration: validationConfiguration, buttonStyle: buttonStyleHandler(.none))
+        viewController?.displayInitialState(viewModel)
+    }
+    
+    func presentValidationDidChange(_ response: Signing.ValidationChange.Response) {
+        let viewModel = Signing.ValidationChange.ViewModel(buttonStyle: buttonStyleHandler(response.validationState))
+        viewController?.displayValidationDidChange(viewModel)
+    }
+    
+    func presentSignMessage() {
+        viewController?.displaySignedMessage()
     }
 }

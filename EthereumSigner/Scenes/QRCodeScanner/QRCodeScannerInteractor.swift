@@ -10,30 +10,42 @@
 //  see http://clean-swift.com
 //
 
+import AVFoundation
 import UIKit
 
 protocol QRCodeScannerBusinessLogic {
-    func doSomething(_ request: QRCodeScanner.Something.Request)
+    func setupCaptureSession()
+    func validateQrCode(_ request: QRCodeScanner.Validation.Request)
 }
 
 protocol QRCodeScannerDataStore {
-    //var name: String { get set }
+    var verificationMessage: String? { get set }
 }
 
 class QRCodeScannerInteractor: QRCodeScannerBusinessLogic, QRCodeScannerDataStore {
+    
+    var verificationMessage: String?
     
     var presenter: QRCodeScannerPresentationLogic?
     lazy var worker: QRCodeScannerWorker? = {
         return QRCodeScannerWorker()
     }()
-    //var name: String = ""
     
-    // MARK: Do something
+    // MARK: Business Logic
     
-    func doSomething(_ request: QRCodeScanner.Something.Request) {
-        worker?.doSomeWork()
+    func setupCaptureSession() {
+        guard let input = worker?.getInputDevice() else { fatalError("Couldn't get camera input device.") }
         
-        let response = QRCodeScanner.Something.Response()
-        presenter?.presentSomething(response)
+        let captureSession = AVCaptureSession()
+        captureSession.addInput(input)
+        
+        presenter?.presentSetupCaptureSession(QRCodeScanner.CaptureSession.Response(captureSession: captureSession))
+    }
+    
+    func validateQrCode(_ request: QRCodeScanner.Validation.Request) {
+        guard let verificationMessage = verificationMessage else { return }
+        Web3Manager.shared.validateQr(request.qrCodeStringValue, verificationMessage: verificationMessage ) { [weak self] result in guard let self = self else { return }
+            self.presenter?.presentQrCodeValidation(QRCodeScanner.Validation.Response(result: result))
+        }
     }
 }

@@ -13,27 +13,37 @@
 import UIKit
 
 protocol VerificationBusinessLogic {
-    func doSomething(_ request: Verification.Something.Request)
+    func requestInitialState()
+    func verifyMessage(_ request: Verification.Verify.Request)
 }
 
 protocol VerificationDataStore {
-    //var name: String { get set }
+    var verificationMessage: String? { get set }
 }
 
 class VerificationInteractor: VerificationBusinessLogic, VerificationDataStore {
+    
+    var verificationMessage: String?
     
     var presenter: VerificationPresentationLogic?
     lazy var worker: VerificationWorker? = {
         return VerificationWorker()
     }()
-    //var name: String = ""
     
-    // MARK: Do something
+    // MARK: Business Logic
     
-    func doSomething(_ request: Verification.Something.Request) {
-        worker?.doSomeWork()
+    func requestInitialState() {
+        let privateKeyTextValidator = TextValidator.NonEmptyTextValidator
         
-        let response = Verification.Something.Response()
-        presenter?.presentSomething(response)
+        let onTextDidChangeClosure: (String) -> Void = { [weak self] text in guard let self = self else { return }
+            self.presenter?.presentValidationDidChange(Verification.ValidationChange.Response(validationState: privateKeyTextValidator.onValidate(text)))
+        }
+        
+        presenter?.presentInitialState(Verification.InitialState.Response(onTextDidChangeClosure: onTextDidChangeClosure, textValidator: privateKeyTextValidator))
+    }
+    
+    func verifyMessage(_ request: Verification.Verify.Request) {
+        verificationMessage = request.verificationMessage
+        presenter?.presentVerification()
     }
 }

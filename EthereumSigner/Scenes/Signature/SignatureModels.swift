@@ -17,7 +17,7 @@ struct Signature {
     
     struct InitialState {
         struct Response {
-            let signedMessage: String
+            let signedMessage: String?
             let qrCodeImage: UIImage?
         }
         

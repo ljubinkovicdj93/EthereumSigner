@@ -10,10 +10,30 @@
 //  see http://clean-swift.com
 //
 
+import AVFoundation
 import UIKit
 
 class QRCodeScannerWorker {
     
-    func doSomeWork() {
+    private var captureDevice: AVCaptureDevice? = {
+        guard let captureDevice = AVCaptureDevice.default(for: AVMediaType.video) else {
+            assertionFailure("Failed to get the camera device")
+            return nil
+        }
+
+        return captureDevice
+    }()
+    
+    func getInputDevice() -> AVCaptureDeviceInput? {
+        guard let captureDevice = captureDevice else { return nil }
+        
+        do {
+            let input = try AVCaptureDeviceInput(device: captureDevice)
+            
+            return input
+        } catch {
+            assertionFailure(error.localizedDescription)
+            return nil
+        }
     }
 }

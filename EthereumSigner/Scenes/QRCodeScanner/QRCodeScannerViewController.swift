@@ -10,19 +10,38 @@
 //  see http://clean-swift.com
 //
 
+import AVFoundation
 import UIKit
 
 protocol QRCodeScannerDisplayLogic: class {
-    func displaySomething(_ viewModel: QRCodeScanner.Something.ViewModel)
+    func displayCaptureSession(_ viewModel: QRCodeScanner.CaptureSession.ViewModel)
+    func displayQrCodeValidation(_ viewModel: QRCodeScanner.Validation.ViewModel)
 }
 
-class QRCodeScannerViewController: UIViewController, QRCodeScannerDisplayLogic {
+class QRCodeScannerViewController: UIViewController {
     
     // MARK: - Properties
     var interactor: QRCodeScannerBusinessLogic?
     var router: QRCodeScannerRouterInput?
     
-    // Mark: - Outlets
+    private var videoPreviewLayer: AVCaptureVideoPreviewLayer?
+    private var captureSession: AVCaptureSession?
+    
+    private let supportedCodeTypes = [AVMetadataObject.ObjectType.upce,
+                                      AVMetadataObject.ObjectType.code39,
+                                      AVMetadataObject.ObjectType.code39Mod43,
+                                      AVMetadataObject.ObjectType.code93,
+                                      AVMetadataObject.ObjectType.code128,
+                                      AVMetadataObject.ObjectType.ean8,
+                                      AVMetadataObject.ObjectType.ean13,
+                                      AVMetadataObject.ObjectType.aztec,
+                                      AVMetadataObject.ObjectType.pdf417,
+                                      AVMetadataObject.ObjectType.itf14,
+                                      AVMetadataObject.ObjectType.dataMatrix,
+                                      AVMetadataObject.ObjectType.interleaved2of5,
+                                      AVMetadataObject.ObjectType.qr]
+    
+    // MARK: - Outlets
     
     //@IBOutlet weak var nameTextField: UITextField!
     
@@ -37,17 +56,54 @@ class QRCodeScannerViewController: UIViewController, QRCodeScannerDisplayLogic {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
+        interactor?.setupCaptureSession()
+    }
+}
+
+extension QRCodeScannerViewController: QRCodeScannerDisplayLogic {
+    func displayCaptureSession(_ viewModel: QRCodeScanner.CaptureSession.ViewModel) {
+        captureSession = viewModel.captureSession
+        let captureMetadataOutput = AVCaptureMetadataOutput()
+        captureSession?.addOutput(captureMetadataOutput)
+        captureMetadataOutput.setMetadataObjectsDelegate(self, queue: .main)
+        captureMetadataOutput.metadataObjectTypes = supportedCodeTypes
+        
+        setupVideoPreviewLayer()
     }
     
-    // MARK: - Do something
-    
-    func doSomething() {
-        let request = QRCodeScanner.Something.Request()
-        interactor?.doSomething(request)
+    func displayQrCodeValidation(_ viewModel: QRCodeScanner.Validation.ViewModel) {
+        let alertController = UIAlertController(title: viewModel.title, message: nil, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(alertAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
-    func displaySomething(_ viewModel: QRCodeScanner.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+    // MARK: - Helpers
+    
+    private func setupVideoPreviewLayer() {
+        guard let captureSession = captureSession else { return }
+        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        videoPreviewLayer?.frame = view.layer.bounds
+        view.layer.addSublayer(videoPreviewLayer!)
+        
+        captureSession.startRunning()
+    }
+}
+
+// MARK: - AVCaptureMetadataOutputObjectsDelegate
+
+extension QRCodeScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        if metadataObjects.count == 0 { return }
+        
+        let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
+        
+        if supportedCodeTypes.contains(metadataObj.type),
+            let stringValue = metadataObj.stringValue {
+            
+            interactor?.validateQrCode(QRCodeScanner.Validation.Request(qrCodeStringValue: stringValue))
+        }
     }
 }

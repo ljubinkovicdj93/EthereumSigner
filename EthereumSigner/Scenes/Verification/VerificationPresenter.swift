@@ -13,17 +13,51 @@
 import UIKit
 
 protocol VerificationPresentationLogic {
-    func presentSomething(_ response: Verification.Something.Response)
+    func presentInitialState(_ response: Verification.InitialState.Response)
+    func presentValidationDidChange(_ response: Verification.ValidationChange.Response)
+    func presentVerification()
 }
 
 class VerificationPresenter: VerificationPresentationLogic {
     
+    private struct Constants {
+        static let ButtonTitle: String = "Verify"
+    }
+    
     weak var viewController: VerificationDisplayLogic?
     
-    // MARK: Do something
+    private var buttonStyleHandler: (ValidationState) -> UIViewStyle<UIButton> = { validationState in
+        return UIViewStyle<UIButton> { button in
+            var isEnabled: Bool = false
+            
+            switch validationState {
+            case .none, .invalid:
+                button.backgroundColor = .lightGray
+            case .valid:
+                isEnabled = true
+                button.backgroundColor = .systemBlue
+            }
+            
+            button.setTitleColor(.white, for: .normal)
+            button.setTitle(Constants.ButtonTitle, for: .normal)
+            button.isEnabled = isEnabled
+        }
+    }
     
-    func presentSomething(_ response: Verification.Something.Response) {
-        let viewModel = Verification.Something.ViewModel()
-        viewController?.displaySomething(viewModel)
+    // MARK: Presentation Logic
+    
+    func presentInitialState(_ response: Verification.InitialState.Response) {
+        let validationConfiguration = ValidationConfiguration(textValidator: response.textValidator, onTextDidChangeCompletion: response.onTextDidChangeClosure)
+        let viewModel = Verification.InitialState.ViewModel(validationConfiguration: validationConfiguration, buttonStyle: buttonStyleHandler(.none))
+        viewController?.displayInitialState(viewModel)
+    }
+    
+    func presentValidationDidChange(_ response: Verification.ValidationChange.Response) {
+        let viewModel = Verification.ValidationChange.ViewModel(buttonStyle: buttonStyleHandler(response.validationState))
+        viewController?.displayValidationDidChange(viewModel)
+    }
+    
+    func presentVerification() {
+        viewController?.displayVerification()
     }
 }

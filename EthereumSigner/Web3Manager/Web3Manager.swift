@@ -16,6 +16,8 @@ enum EthereumError: Error {
     case invalidPrivateKey(String)
     case noAccountAddressFound
     case noBalanceAvailable
+    case invalidQrCode(String)
+    case cannotValidateQrCode(String)
 }
 
 class Web3Manager {
@@ -28,19 +30,11 @@ class Web3Manager {
             try? storeKeystore()
         }
     }
-//    {
-//        get {
-//            if Keychain.contains.privateKey {
-//                return keychainPrivateKey
-//            } else {
-//                return nil
-//            }
-//        }
-//    }
     
     private var privateKeyData: Data?
     private var keystore: EthereumKeystoreV3?
     private var accountAddress: String?
+    private var signedMessage: String?
     
     lazy var provider: web3 = Web3.InfuraRinkebyWeb3()
     
@@ -90,13 +84,34 @@ class Web3Manager {
         guard let addresses = keystoreManager.addresses else { return nil }
         do {
             guard let messageData = message.data(using: .utf8) else { return nil }
+            
             let signedData = try provider.personal.signPersonalMessage(message: messageData, from: addresses[0])
             let signedBase64Data = signedData.base64EncodedData()
+            
+            signedMessage = message
             
             return signedBase64Data
         } catch {
             fatalError(error.localizedDescription)
         }
+    }
+    
+    func validateQr(_ qrStringValue: String, verificationMessage: String, completion: @escaping (Swift.Result<String, EthereumError>) -> Void) {
+        guard let verificationMessageData = verificationMessage.data(using: .utf8) else { return }
+        
+        if let signature = Data(base64Encoded: qrStringValue),
+            let unmarshalledSignature = SECP256K1.unmarshalSignature(signatureData: signature) {
+            
+            let signer = try? provider.personal.ecrecover(personalMessage: verificationMessageData,
+                                                          signature: signature)
+            
+            if signer?.address == accountAddress {
+                completion(.success("Signature is valid."))
+            } else {
+                completion(.failure(EthereumError.invalidQrCode(qrStringValue)))
+            }
+        }
+        completion(.failure(EthereumError.cannotValidateQrCode(qrStringValue)))
     }
 }
 

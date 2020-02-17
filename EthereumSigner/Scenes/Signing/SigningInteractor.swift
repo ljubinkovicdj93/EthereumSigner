@@ -13,6 +13,7 @@
 import UIKit
 
 protocol SigningBusinessLogic {
+    func requestInitialState()
     func signMessage(_ request: Signing.Signature.Request)
 }
 
@@ -33,10 +34,20 @@ class SigningInteractor: SigningBusinessLogic, SigningDataStore {
     
     // MARK: Business Logic
     
+    func requestInitialState() {
+        let privateKeyTextValidator = TextValidator.NonEmptyTextValidator
+        
+        let onTextDidChangeClosure: (String) -> Void = { [weak self] text in guard let self = self else { return }
+            self.presenter?.presentValidationDidChange(Signing.ValidationChange.Response(validationState: privateKeyTextValidator.onValidate(text)))
+        }
+        
+        presenter?.presentInitialState(Signing.InitialState.Response(onTextDidChangeClosure: onTextDidChangeClosure, textValidator: privateKeyTextValidator))
+    }
+    
     func signMessage(_ request: Signing.Signature.Request) {
         signedMessage = request.signedMessage
         imageData = worker?.signedMessageData(signedMessage)
         
-        presenter?.presentSignMessage(Signing.Signature.Response(signedMessage: signedMessage))
+        presenter?.presentSignMessage()
     }
 }

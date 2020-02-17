@@ -13,7 +13,7 @@
 import UIKit
 
 protocol VerificationRoutingNavigation {
-    func showNewScreen()
+    func showQrCodeScanner()
 }
 
 protocol VerificationDataPassing {
@@ -26,7 +26,7 @@ typealias VerificationRouterInput = VerificationRoutingNavigation & Verification
 class VerificationRouter: VerificationRouterInput {
     
     private struct Segues {
-        static let ShowNextScreenIdentifier = ""
+        static let ShowQrCodeScannerIdentifier = "showQrCodeScanner"
     }
     
     var dataStore: VerificationDataStore?
@@ -34,15 +34,17 @@ class VerificationRouter: VerificationRouterInput {
     
     // MARK: Navigation
     
-    func showNewScreen() {
-        viewController?.performSegue(withIdentifier: Segues.ShowNextScreenIdentifier, sender: nil)
+    func showQrCodeScanner() {
+        viewController?.performSegue(withIdentifier: Segues.ShowQrCodeScannerIdentifier, sender: nil)
     }
     
     // MARK: Passing data
     
     func passDataToNextScene(segue: UIStoryboardSegue) {
-        if segue.identifier == Segues.ShowNextScreenIdentifier {
-            // Pass Relevant Data
+        if segue.identifier == Segues.ShowQrCodeScannerIdentifier,
+            let qrCodeScannerViewController = segue.destination as? QRCodeScannerViewController {
+            
+            qrCodeScannerViewController.router?.dataStore?.verificationMessage = dataStore?.verificationMessage
         }
     }
 }

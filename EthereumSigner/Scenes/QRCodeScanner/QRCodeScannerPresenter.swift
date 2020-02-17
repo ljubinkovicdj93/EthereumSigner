@@ -13,17 +13,29 @@
 import UIKit
 
 protocol QRCodeScannerPresentationLogic {
-    func presentSomething(_ response: QRCodeScanner.Something.Response)
+    func presentSetupCaptureSession(_ response: QRCodeScanner.CaptureSession.Response)
+    func presentQrCodeValidation(_ response: QRCodeScanner.Validation.Response)
 }
 
 class QRCodeScannerPresenter: QRCodeScannerPresentationLogic {
     
     weak var viewController: QRCodeScannerDisplayLogic?
     
-    // MARK: Do something
+    // MARK: Presentation Logic
     
-    func presentSomething(_ response: QRCodeScanner.Something.Response) {
-        let viewModel = QRCodeScanner.Something.ViewModel()
-        viewController?.displaySomething(viewModel)
+    func presentSetupCaptureSession(_ response: QRCodeScanner.CaptureSession.Response) {
+        viewController?.displayCaptureSession(response)
+    }
+    
+    func presentQrCodeValidation(_ response: QRCodeScanner.Validation.Response) {
+        let title: String
+        switch response.result {
+        case let .success(message):
+            title = message
+        case let .failure(qrCodeError):
+            title = qrCodeError.localizedDescription
+        }
+        let viewModel = QRCodeScanner.Validation.ViewModel(title: title)
+        viewController?.displayQrCodeValidation(viewModel)
     }
 }

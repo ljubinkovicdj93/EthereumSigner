@@ -34,7 +34,7 @@ class SignatureInteractor: SignatureBusinessLogic, SignatureDataStore {
     // MARK: Business Logic
     
     func requestInitialState() {
-        presenter?.presentInitialState(Signature.InitialState.Response(signedMessage: "Message: \(signedMessage ?? .empty)",
+        presenter?.presentInitialState(Signature.InitialState.Response(signedMessage: signedMessage,
                                                                        qrCodeImage: worker?.generateQRCode(from: imageData)))
     }
 }

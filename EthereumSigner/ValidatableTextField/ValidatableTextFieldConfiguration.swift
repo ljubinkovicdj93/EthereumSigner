@@ -91,6 +91,12 @@ struct TextValidator {
     
     let onValidate: (String) -> ValidationState
     
+    static let NonEmptyTextValidator = TextValidator { text in
+        guard !text.isEmpty else { return .none }
+        
+        return .valid
+    }
+    
     static let EthereumPrivateKeyValidator = TextValidator { text in
         guard !text.isEmpty else { return .none }
         

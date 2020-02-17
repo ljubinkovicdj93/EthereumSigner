@@ -11,7 +11,7 @@
         <!--Verification-->
         <scene sceneID="txV-O6-wzc">
             <objects>
-                <viewController id="4JH-Fn-JXz" sceneMemberID="viewController">
+                <viewController id="4JH-Fn-JXz" customClass="VerificationViewController" customModule="EthereumSigner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8V4-Pa-s6J">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -24,6 +24,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WW5-T2-OJ2">
                                 <rect key="frame" x="16" y="473" width="382" height="30"/>
                                 <state key="normal" title="Verify Message"/>
+                                <connections>
+                                    <action selector="onVerifyTapped:" destination="4JH-Fn-JXz" eventType="touchUpInside" id="bhd-Jk-Rcd"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -39,10 +42,31 @@
                         <viewLayoutGuide key="safeArea" id="k8d-F2-dGZ"/>
                     </view>
                     <navigationItem key="navigationItem" title="Verification" id="lOq-hd-2gJ"/>
+                    <connections>
+                        <outlet property="verificationMessageTextField" destination="EKG-t2-U2p" id="xmG-c4-1Vs"/>
+                        <outlet property="verifyButton" destination="WW5-T2-OJ2" id="aCU-9e-YvH"/>
+                        <segue destination="E07-6b-OLs" kind="show" identifier="showQrCodeScanner" id="HIK-Na-d9j"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYS-C8-70I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="931.88405797101461" y="131.91964285714286"/>
+        </scene>
+        <!--QR Code Scanner-->
+        <scene sceneID="NV3-Wz-c4s">
+            <objects>
+                <viewController id="E07-6b-OLs" customClass="QRCodeScannerViewController" customModule="EthereumSigner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pkh-YE-NTn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="kA5-k8-VpP"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="QR Code Scanner" id="YRP-AS-iYv"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F4o-6z-NhI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1923" y="132"/>
         </scene>
     </scenes>
 </document>

@@ -15,12 +15,31 @@ import UIKit
 struct Signing {
     // MARK: Use cases
     
+    struct InitialState {
+        struct Response {
+            let onTextDidChangeClosure: (String) -> Void
+            let textValidator: TextValidator
+        }
+        
+        struct ViewModel {
+            let validationConfiguration: ValidationConfiguration
+            let buttonStyle: UIViewStyle<UIButton>
+        }
+    }
+    
+    struct ValidationChange {
+        struct Response {
+            let validationState: ValidationState
+        }
+        
+        struct ViewModel {
+            let buttonStyle: UIViewStyle<UIButton>
+        }
+    }
+    
     struct Signature {
         struct Request {
             let signedMessage: String
         }
-        
-        typealias Response = Request
-        typealias ViewModel = Response
     }
 }
