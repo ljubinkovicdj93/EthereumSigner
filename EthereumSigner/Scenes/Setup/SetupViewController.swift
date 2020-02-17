@@ -48,12 +48,17 @@ class SetupViewController: UIViewController {
         
         performInitialCheck()
         
+        // These should go inside presenter
+        title = SetupStrings.navigationTitle.localized
+        privateKeyTextField.placeholder = SetupStrings.textFieldPlaceholder.localized
+        
         #warning("TODO: REMOVE!!!")
         privateKeyTextField.text = "A6E4AF5B2B8323E965876D94D9CE635723A8A7193E61000D241CDDEAA613F3E4"
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         handleKeyboard()
         hideKeyboardWhenTappedAround()
     }

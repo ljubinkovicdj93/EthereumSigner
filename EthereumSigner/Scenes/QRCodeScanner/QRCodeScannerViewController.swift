@@ -57,6 +57,8 @@ class QRCodeScannerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor?.setupCaptureSession()
+        
+        title = QRCodeScannerStrings.navigationTitle.localized
     }
 }
 
@@ -73,7 +75,11 @@ extension QRCodeScannerViewController: QRCodeScannerDisplayLogic {
     
     func displayQrCodeValidation(_ viewModel: QRCodeScanner.Validation.ViewModel) {
         let alertController = UIAlertController(title: viewModel.title, message: nil, preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let alertAction = UIAlertAction(title: QRCodeScannerStrings.okAlertAction.localized,
+                                        style: .default,
+                                        handler: { [weak self]  _ in guard let self = self else { return }
+                                            self.router?.showDismiss()
+        })
         alertController.addAction(alertAction)
         
         present(alertController, animated: true, completion: nil)

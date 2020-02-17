@@ -9,6 +9,21 @@
 /* Begin PBXBuildFile section */
 		9F054E0B23FB2497002CBC20 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F054E0A23FB2497002CBC20 /* KeychainManager.swift */; };
 		9F054E0D23FB25D7002CBC20 /* RoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F054E0C23FB25D7002CBC20 /* RoutingService.swift */; };
+		9F054E1023FB2D9A002CBC20 /* SetupTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F054E0F23FB2D9A002CBC20 /* SetupTable.swift */; };
+		9F054E1223FB2E2D002CBC20 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F054E1123FB2E2D002CBC20 /* Localizable.swift */; };
+		9F054E1B23FB3397002CBC20 /* Setup.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F054E1A23FB3397002CBC20 /* Setup.strings */; };
+		9F054E2023FB3BA4002CBC20 /* Account.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F054E1F23FB3BA4002CBC20 /* Account.strings */; };
+		9F054E2223FB3BAA002CBC20 /* AccountTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F054E2123FB3BAA002CBC20 /* AccountTable.swift */; };
+		9F054E2423FB3D5A002CBC20 /* SigningStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F054E2323FB3D5A002CBC20 /* SigningStrings.swift */; };
+		9F054E2623FB3D88002CBC20 /* Signing.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F054E2523FB3D88002CBC20 /* Signing.strings */; };
+		9F054E2823FB3EB5002CBC20 /* Signature.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F054E2723FB3EB5002CBC20 /* Signature.strings */; };
+		9F054E2A23FB3EB8002CBC20 /* SignatureStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F054E2923FB3EB8002CBC20 /* SignatureStrings.swift */; };
+		9F054E2C23FB3F79002CBC20 /* Verification.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F054E2B23FB3F79002CBC20 /* Verification.strings */; };
+		9F054E2E23FB3FAB002CBC20 /* VerificationStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F054E2D23FB3FAB002CBC20 /* VerificationStrings.swift */; };
+		9F054E3023FB401D002CBC20 /* QRCodeScanner.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F054E2F23FB401D002CBC20 /* QRCodeScanner.strings */; };
+		9F054E3223FB4064002CBC20 /* QRCodeScannerStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F054E3123FB4064002CBC20 /* QRCodeScannerStrings.swift */; };
+		9F054E3423FB4112002CBC20 /* Errors.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F054E3323FB4112002CBC20 /* Errors.strings */; };
+		9F054E3623FB4119002CBC20 /* ErrorsStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F054E3523FB4119002CBC20 /* ErrorsStrings.swift */; };
 		9F1E818F23EED47900F0969D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1E818E23EED47900F0969D /* AppDelegate.swift */; };
 		9F1E819323EED47900F0969D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1E819223EED47900F0969D /* ViewController.swift */; };
 		9F1E819823EED47A00F0969D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F1E819723EED47A00F0969D /* Assets.xcassets */; };
@@ -74,6 +89,21 @@
 		8BF10A22CF6AA96B843E6783 /* Pods-EthereumSigner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EthereumSigner.release.xcconfig"; path = "Target Support Files/Pods-EthereumSigner/Pods-EthereumSigner.release.xcconfig"; sourceTree = "<group>"; };
 		9F054E0A23FB2497002CBC20 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		9F054E0C23FB25D7002CBC20 /* RoutingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingService.swift; sourceTree = "<group>"; };
+		9F054E0F23FB2D9A002CBC20 /* SetupTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupTable.swift; sourceTree = "<group>"; };
+		9F054E1123FB2E2D002CBC20 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
+		9F054E1A23FB3397002CBC20 /* Setup.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Setup.strings; sourceTree = "<group>"; };
+		9F054E1F23FB3BA4002CBC20 /* Account.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Account.strings; sourceTree = "<group>"; };
+		9F054E2123FB3BAA002CBC20 /* AccountTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTable.swift; sourceTree = "<group>"; };
+		9F054E2323FB3D5A002CBC20 /* SigningStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningStrings.swift; sourceTree = "<group>"; };
+		9F054E2523FB3D88002CBC20 /* Signing.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Signing.strings; sourceTree = "<group>"; };
+		9F054E2723FB3EB5002CBC20 /* Signature.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Signature.strings; sourceTree = "<group>"; };
+		9F054E2923FB3EB8002CBC20 /* SignatureStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureStrings.swift; sourceTree = "<group>"; };
+		9F054E2B23FB3F79002CBC20 /* Verification.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Verification.strings; sourceTree = "<group>"; };
+		9F054E2D23FB3FAB002CBC20 /* VerificationStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationStrings.swift; sourceTree = "<group>"; };
+		9F054E2F23FB401D002CBC20 /* QRCodeScanner.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = QRCodeScanner.strings; sourceTree = "<group>"; };
+		9F054E3123FB4064002CBC20 /* QRCodeScannerStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerStrings.swift; sourceTree = "<group>"; };
+		9F054E3323FB4112002CBC20 /* Errors.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Errors.strings; sourceTree = "<group>"; };
+		9F054E3523FB4119002CBC20 /* ErrorsStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorsStrings.swift; sourceTree = "<group>"; };
 		9F1E818B23EED47900F0969D /* EthereumSigner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EthereumSigner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F1E818E23EED47900F0969D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F1E819223EED47900F0969D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -163,6 +193,44 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9F054E0E23FB2D33002CBC20 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				9F054E1123FB2E2D002CBC20 /* Localizable.swift */,
+				9F054E1E23FB3A35002CBC20 /* StringFiles */,
+				9F054E1323FB2E71002CBC20 /* Tables */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		9F054E1323FB2E71002CBC20 /* Tables */ = {
+			isa = PBXGroup;
+			children = (
+				9F054E0F23FB2D9A002CBC20 /* SetupTable.swift */,
+				9F054E2123FB3BAA002CBC20 /* AccountTable.swift */,
+				9F054E2323FB3D5A002CBC20 /* SigningStrings.swift */,
+				9F054E2923FB3EB8002CBC20 /* SignatureStrings.swift */,
+				9F054E2D23FB3FAB002CBC20 /* VerificationStrings.swift */,
+				9F054E3123FB4064002CBC20 /* QRCodeScannerStrings.swift */,
+				9F054E3523FB4119002CBC20 /* ErrorsStrings.swift */,
+			);
+			path = Tables;
+			sourceTree = "<group>";
+		};
+		9F054E1E23FB3A35002CBC20 /* StringFiles */ = {
+			isa = PBXGroup;
+			children = (
+				9F054E1A23FB3397002CBC20 /* Setup.strings */,
+				9F054E1F23FB3BA4002CBC20 /* Account.strings */,
+				9F054E2523FB3D88002CBC20 /* Signing.strings */,
+				9F054E2723FB3EB5002CBC20 /* Signature.strings */,
+				9F054E2B23FB3F79002CBC20 /* Verification.strings */,
+				9F054E2F23FB401D002CBC20 /* QRCodeScanner.strings */,
+				9F054E3323FB4112002CBC20 /* Errors.strings */,
+			);
+			path = StringFiles;
+			sourceTree = "<group>";
+		};
 		9F1E818223EED47900F0969D = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +252,7 @@
 		9F1E818D23EED47900F0969D /* EthereumSigner */ = {
 			isa = PBXGroup;
 			children = (
+				9F054E0E23FB2D33002CBC20 /* Localization */,
 				9F8ADFDF23F992A70075FBA3 /* Utils */,
 				9F8ADFDC23F97F9E0075FBA3 /* Web3Manager */,
 				9F8ADFD923F95BE90075FBA3 /* ValidatableTextField */,
@@ -403,11 +472,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F054E2623FB3D88002CBC20 /* Signing.strings in Resources */,
 				9F77964423EF50DF00E579B1 /* Setup.storyboard in Resources */,
 				9F1E819B23EED47A00F0969D /* LaunchScreen.storyboard in Resources */,
+				9F054E2823FB3EB5002CBC20 /* Signature.strings in Resources */,
 				9F77964623EF50E900E579B1 /* Account.storyboard in Resources */,
+				9F054E3423FB4112002CBC20 /* Errors.strings in Resources */,
 				9F1E819823EED47A00F0969D /* Assets.xcassets in Resources */,
+				9F054E2023FB3BA4002CBC20 /* Account.strings in Resources */,
 				9F77964823EF50FC00E579B1 /* Signing.storyboard in Resources */,
+				9F054E1B23FB3397002CBC20 /* Setup.strings in Resources */,
+				9F054E3023FB401D002CBC20 /* QRCodeScanner.strings in Resources */,
+				9F054E2C23FB3F79002CBC20 /* Verification.strings in Resources */,
 				9F77964A23EF510D00E579B1 /* Verification.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,12 +538,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FAE317E23EEE6A2004F3D72 /* SigningInteractor.swift in Sources */,
+				9F054E2223FB3BAA002CBC20 /* AccountTable.swift in Sources */,
 				9F8ADFDE23F97FAA0075FBA3 /* Web3Manager.swift in Sources */,
 				9FAE319B23EEE6B9004F3D72 /* VerificationConfigurator.swift in Sources */,
 				9F7F981B23F9FBAE00C2D0A9 /* DataExtensions.swift in Sources */,
 				9FAE317D23EEE6A2004F3D72 /* SigningViewController.swift in Sources */,
 				9FAE317923EEE6A2004F3D72 /* SigningPresenter.swift in Sources */,
 				9FAE317C23EEE6A2004F3D72 /* SigningModels.swift in Sources */,
+				9F054E2423FB3D5A002CBC20 /* SigningStrings.swift in Sources */,
+				9F054E1023FB2D9A002CBC20 /* SetupTable.swift in Sources */,
 				9F8ADFE323F996980075FBA3 /* UIViewControllerExtensions.swift in Sources */,
 				9F8ADFE123F992AF0075FBA3 /* UIViewStyle.swift in Sources */,
 				9FAE316D23EEE695004F3D72 /* AccountRouter.swift in Sources */,
@@ -489,15 +568,18 @@
 				9F1E818F23EED47900F0969D /* AppDelegate.swift in Sources */,
 				9FAE318D23EEE6AE004F3D72 /* SignatureConfigurator.swift in Sources */,
 				9FAE31A623EEE6C6004F3D72 /* QRCodeScannerModels.swift in Sources */,
+				9F054E2A23FB3EB8002CBC20 /* SignatureStrings.swift in Sources */,
 				9FAE315F23EEE68A004F3D72 /* SetupRouter.swift in Sources */,
 				9FAE319A23EEE6B9004F3D72 /* VerificationInteractor.swift in Sources */,
 				9FAE319623EEE6B9004F3D72 /* VerificationWorker.swift in Sources */,
 				9FAE315D23EEE68A004F3D72 /* SetupPresenter.swift in Sources */,
 				9FAE319823EEE6B9004F3D72 /* VerificationModels.swift in Sources */,
+				9F054E1223FB2E2D002CBC20 /* Localizable.swift in Sources */,
 				9FAE316E23EEE695004F3D72 /* AccountModels.swift in Sources */,
 				9FAE319723EEE6B9004F3D72 /* VerificationRouter.swift in Sources */,
 				9FAE31A823EEE6C6004F3D72 /* QRCodeScannerInteractor.swift in Sources */,
 				9FAE318723EEE6AE004F3D72 /* SignaturePresenter.swift in Sources */,
+				9F054E3223FB4064002CBC20 /* QRCodeScannerStrings.swift in Sources */,
 				9FAE317023EEE695004F3D72 /* AccountInteractor.swift in Sources */,
 				9FAE316223EEE68A004F3D72 /* SetupInteractor.swift in Sources */,
 				9FAE315E23EEE68A004F3D72 /* SetupWorker.swift in Sources */,
@@ -508,11 +590,13 @@
 				9F054E0D23FB25D7002CBC20 /* RoutingService.swift in Sources */,
 				9FAE316123EEE68A004F3D72 /* SetupViewController.swift in Sources */,
 				9FAE317F23EEE6A2004F3D72 /* SigningConfigurator.swift in Sources */,
+				9F054E3623FB4119002CBC20 /* ErrorsStrings.swift in Sources */,
 				9FAE316323EEE68A004F3D72 /* SetupConfigurator.swift in Sources */,
 				9FAE318B23EEE6AE004F3D72 /* SignatureViewController.swift in Sources */,
 				9FAE31A923EEE6C6004F3D72 /* QRCodeScannerConfigurator.swift in Sources */,
 				9FAE318823EEE6AE004F3D72 /* SignatureWorker.swift in Sources */,
 				9FAE317A23EEE6A2004F3D72 /* SigningWorker.swift in Sources */,
+				9F054E2E23FB3FAB002CBC20 /* VerificationStrings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -44,6 +44,9 @@ class VerificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor?.requestInitialState()
+        
+        title = VerificationStrings.navigationTitle.localized
+        verificationMessageTextField.placeholder = VerificationStrings.textFieldPlaceholder.localized
     }
     
     // MARK: - Actions

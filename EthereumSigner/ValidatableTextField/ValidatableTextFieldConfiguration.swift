@@ -105,7 +105,8 @@ struct TextValidator {
         if formattedText.count == Constants.Ethereum.MaximumCharactersAllowed.PrivateKey && formattedText.isAlphanumeric && formattedText != Constants.Ethereum.AllZeroCharacters {
             return .valid
         } else {
-            return .invalid("Invalid private key. Enter at least 64 alphanumeric letters, or 66 if the first two are `0x`")
+//            return .invalid("Invalid private key. Enter at least 64 alphanumeric letters, or 66 if the first two are `0x`")
+            return .invalid(SetupStrings.errorLabelTitle.localized)
         }
     }
 }

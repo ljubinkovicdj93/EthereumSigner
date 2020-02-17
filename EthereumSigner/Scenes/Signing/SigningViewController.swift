@@ -44,6 +44,10 @@ class SigningViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor?.requestInitialState()
+        
+        // These should go inside presenter
+        title = SigningStrings.navigationTitle.localized
+        signMessageTextField.placeholder = SigningStrings.textFieldPlaceholder.localized
     }
     
     override func viewDidAppear(_ animated: Bool) {

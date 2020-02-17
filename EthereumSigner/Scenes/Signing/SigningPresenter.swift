@@ -21,7 +21,7 @@ protocol SigningPresentationLogic {
 class SigningPresenter: SigningPresentationLogic {
     
     private struct Constants {
-        static let ButtonTitle: String = "Sign Message"
+        static let ButtonTitle: String = SigningStrings.signMessageButtonTitle.localized
     }
     
     weak var viewController: SigningDisplayLogic?

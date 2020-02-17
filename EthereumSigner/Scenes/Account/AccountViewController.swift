@@ -25,8 +25,14 @@ class AccountViewController: UIViewController {
     
     // MARK: - Outlets
     
+    @IBOutlet weak var accountAddressLegendLabel: UILabel!
     @IBOutlet weak var accountAddressLabel: UILabel!
+    
+    @IBOutlet weak var balanceLegendLabel: UILabel!
     @IBOutlet weak var balanceLabel: UILabel!
+    
+    @IBOutlet weak var signButton: UIButton!
+    @IBOutlet weak var verifyButton: UIButton!
     
     // MARK: - Object Lifecycle
     
@@ -40,6 +46,13 @@ class AccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor?.updateViews()
+        
+        // These should go inside presenter
+        title = AccountStrings.navigationTitle.localized
+        accountAddressLegendLabel.text = AccountStrings.addressLabel.localized
+        balanceLegendLabel.text = AccountStrings.balanceLabel.localized
+        signButton.setTitle(AccountStrings.signButtonTitle.localized, for: .normal)
+        verifyButton.setTitle(AccountStrings.verifyButtonTitle.localized, for: .normal)
     }
 }
 

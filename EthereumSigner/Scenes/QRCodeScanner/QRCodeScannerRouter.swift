@@ -14,6 +14,7 @@ import UIKit
 
 protocol QRCodeScannerRoutingNavigation {
     func showNewScreen()
+    func showDismiss()
 }
 
 protocol QRCodeScannerDataPassing {
@@ -36,6 +37,10 @@ class QRCodeScannerRouter: QRCodeScannerRouterInput {
     
     func showNewScreen() {
         viewController?.performSegue(withIdentifier: Segues.ShowNextScreenIdentifier, sender: nil)
+    }
+    
+    func showDismiss() {
+        viewController?.navigationController?.popViewController(animated: true)
     }
     
     // MARK: Passing data

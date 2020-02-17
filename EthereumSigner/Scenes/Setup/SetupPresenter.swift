@@ -21,7 +21,7 @@ protocol SetupPresentationLogic {
 class SetupPresenter: SetupPresentationLogic {
     
     private struct Constants {
-        static let ButtonTitle: String = "Next"
+        static let ButtonTitle: String = SetupStrings.nextButtonTitle.localized
     }
     
     private lazy var errorLabelStyleHandler: (ValidationState) -> UIViewStyle<UILabel> = { validationState in

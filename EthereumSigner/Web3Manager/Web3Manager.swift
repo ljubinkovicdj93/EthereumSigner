@@ -20,6 +20,27 @@ enum EthereumError: Error {
     case cannotValidateQrCode(String)
 }
 
+extension EthereumError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case let .genericError(message):
+            return String(format: ErrorsStrings.genericError.localized, message)
+        case let .initializeKeystoreFail(message):
+            return String(format: ErrorsStrings.initializeKeystoreFail.localized, message)
+        case let .invalidPrivateKey(message):
+            return String(format: ErrorsStrings.invalidPrivateKey.localized, message)
+        case .noAccountAddressFound:
+            return ErrorsStrings.noAccountAddressFound.localized
+        case .noBalanceAvailable:
+            return ErrorsStrings.noBalanceAvailable.localized
+        case let .invalidQrCode(message):
+            return String(format: ErrorsStrings.invalidQrCode.localized, message)
+        case let .cannotValidateQrCode(message):
+            return String(format: ErrorsStrings.cannotValidateQrCode.localized, message)
+        }
+    }
+}
+
 class Web3Manager {
     static let shared = Web3Manager()
     
@@ -111,7 +132,7 @@ class Web3Manager {
                                                           signature: signature)
             
             if signer?.address == accountAddress {
-                completion(.success("Signature is valid."))
+                completion(.success(QRCodeScannerStrings.signatureValidTitle.localized))
             } else {
                 completion(.failure(EthereumError.invalidQrCode(qrStringValue)))
             }
