@@ -1,0 +1,13 @@
+/* 
+  Account.strings
+  EthereumSigner
+
+  Created by Djordje Ljubinkovic on 2/17/20.
+  Copyright © 2020 Djordje Ljubinkovic. All rights reserved.
+*/
+
+"navigationTitle" = "Account";
+"addressLabel" = "Address";
+"balanceLabel" = "Balance";
+"signButtonTitle" = "Sign";
+"verifyButtonTitle" = "Verify";

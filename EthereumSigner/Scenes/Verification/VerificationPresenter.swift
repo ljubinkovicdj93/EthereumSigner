@@ -21,7 +21,7 @@ protocol VerificationPresentationLogic {
 class VerificationPresenter: VerificationPresentationLogic {
     
     private struct Constants {
-        static let ButtonTitle: String = "Verify"
+        static let ButtonTitle: String = VerificationStrings.verifyMessageButtonTitle.localized
     }
     
     weak var viewController: VerificationDisplayLogic?

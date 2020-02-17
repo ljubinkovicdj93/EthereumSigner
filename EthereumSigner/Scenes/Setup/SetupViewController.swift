@@ -43,17 +43,19 @@ class SetupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment to always show setup screen first.
+        #warning("Uncomment to always show setup screen first.")
 //        KeychainManager.deleteKeys()
         
         performInitialCheck()
         
-        #warning("TODO: REMOVE!!!")
-        privateKeyTextField.text = "A6E4AF5B2B8323E965876D94D9CE635723A8A7193E61000D241CDDEAA613F3E4"
+        // These should go inside presenter
+        title = SetupStrings.navigationTitle.localized
+        privateKeyTextField.placeholder = SetupStrings.textFieldPlaceholder.localized
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         handleKeyboard()
         hideKeyboardWhenTappedAround()
     }
@@ -97,10 +99,6 @@ extension SetupViewController: SetupDisplayLogic {
         
         viewModel.buttonStyle.apply(to: nextButton)
         viewModel.errorLabelStyle.apply(to: errorMessageLabel)
-        
-        #warning("TODO: REMOVE!!!")
-        nextButton.backgroundColor = .systemBlue
-        nextButton.isEnabled = true
     }
     
     func displayValidationDidChange(_ viewModel: Setup.ValidationChange.ViewModel) {

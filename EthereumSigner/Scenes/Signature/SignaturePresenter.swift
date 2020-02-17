@@ -24,7 +24,7 @@ class SignaturePresenter: SignaturePresentationLogic {
     
     func presentInitialState(_ response: Signature.InitialState.Response) {
         let signedMessageLabelStyle = UIViewStyle<UILabel> { label in
-            label.text = "Message: \"\(response.signedMessage ?? .empty)\""
+            label.text = String(format: SignatureStrings.messageLabelTitle.localized, response.signedMessage ?? .empty)
         }
         
         let imageViewStyle = UIViewStyle<UIImageView> { imageView in

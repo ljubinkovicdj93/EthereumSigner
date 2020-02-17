@@ -40,6 +40,8 @@ class SignatureViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor?.requestInitialState()
+        
+        title = SignatureStrings.navigationTitle.localized
     }
 }
 

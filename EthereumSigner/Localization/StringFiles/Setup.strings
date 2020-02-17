@@ -1,0 +1,12 @@
+/* 
+  Setup.strings
+  EthereumSigner
+
+  Created by Djordje Ljubinkovic on 2/17/20.
+  Copyright © 2020 Djordje Ljubinkovic. All rights reserved.
+*/
+ 
+"navigationTitle" = "Setup";
+"nextButtonTitle" = "Next";
+"errorLabelTitle" = "Invalid private key. Enter at least 64 alphanumeric letters, or 66 if the first two are `0x`";
+"textFieldPlaceholder" = "Private key";

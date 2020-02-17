@@ -1,0 +1,11 @@
+/* 
+  Verification.strings
+  EthereumSigner
+
+  Created by Djordje Ljubinkovic on 2/17/20.
+  Copyright © 2020 Djordje Ljubinkovic. All rights reserved.
+*/
+
+"navigationTitle" = "Verification";
+"verifyMessageButtonTitle" = "Verify message";
+"textFieldPlaceholder" = "Your message";
